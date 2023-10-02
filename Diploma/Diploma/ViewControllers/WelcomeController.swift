@@ -57,24 +57,25 @@ class WelcomeController: UIViewController {
         button.layer.borderWidth = 4
         button.layer.borderColor = UIColor.systemCyan.cgColor
         button.setTitleColor(.black, for: .normal)
+        button.addTarget(self, action:#selector(startGame), for: .touchUpInside)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         makeUI()
         makeConstraints()
         view.backgroundColor = .systemYellow
     }
-
+    
     func makeUI() {
         self.view.addSubview(mainView)
         self.view.addSubview(changeLabel)
         self.view.addSubview(changeSegment)
         mainView.addSubview(mainLabel)
         self.view.addSubview(doneButton)
-     }
-     
+    }
+    
     func makeConstraints() {
         mainView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(100)
@@ -95,7 +96,7 @@ class WelcomeController: UIViewController {
             make.leading.equalToSuperview().inset(16)
             make.trailing.equalToSuperview().inset(16)
         }
-            
+        
         changeSegment.snp.makeConstraints { make in
             make.top.equalTo(changeLabel).inset(70)
             make.leading.equalToSuperview().inset(16)
@@ -108,6 +109,11 @@ class WelcomeController: UIViewController {
             make.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
         }
-     }
+    }
+    
+    @objc func startGame(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let addVC = storyboard.instantiateViewController(withIdentifier: String(describing: GameFieldController.self)) as? GameFieldController else { return }
+        self.navigationController?.pushViewController(addVC, animated: true)
+    }
 }
-
