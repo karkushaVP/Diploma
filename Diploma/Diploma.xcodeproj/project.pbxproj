@@ -7,34 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EE038ACD2ACB51B400B63927 /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE038ACC2ACB51B400B63927 /* SettingsController.swift */; };
-		EE038ACF2ACB52C000B63927 /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE038ACE2ACB52C000B63927 /* FlexibleView.swift */; };
 		EE1F077E2ABC9FC20038BE8C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F077D2ABC9FC20038BE8C /* SnapKit */; };
-		EE1F07802AC1D7320038BE8C /* GameFieldController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1F077F2AC1D7320038BE8C /* GameFieldController.swift */; };
 		EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1F07822AC1D8900038BE8C /* RealmManager.swift */; };
 		EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F07882AC1D9AB0038BE8C /* Realm */; };
 		EE1F078B2AC1D9AB0038BE8C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F078A2AC1D9AB0038BE8C /* RealmSwift */; };
 		EEA9A1F62AB1C95E00B45518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */; };
 		EEA9A1F82AB1C95E00B45518 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9A1F72AB1C95E00B45518 /* SceneDelegate.swift */; };
-		EEA9A1FA2AB1C95E00B45518 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9A1F92AB1C95E00B45518 /* WelcomeController.swift */; };
 		EEA9A1FD2AB1C95E00B45518 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA9A1FB2AB1C95E00B45518 /* Main.storyboard */; };
 		EEA9A1FF2AB1C95F00B45518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9A1FE2AB1C95F00B45518 /* Assets.xcassets */; };
 		EEA9A2022AB1C95F00B45518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA9A2002AB1C95F00B45518 /* LaunchScreen.storyboard */; };
+		EEF329602AE718AF00053CCA /* RegisterationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF3295F2AE718AF00053CCA /* RegisterationViewController.swift */; };
+		EEF329632AE71AFF00053CCA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EEF329622AE71AFF00053CCA /* FirebaseAuth */; };
+		EEF329652AE71AFF00053CCA /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EEF329642AE71AFF00053CCA /* FirebaseDatabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EE038ACC2ACB51B400B63927 /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
-		EE038ACE2ACB52C000B63927 /* FlexibleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleView.swift; sourceTree = "<group>"; };
-		EE1F077F2AC1D7320038BE8C /* GameFieldController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFieldController.swift; sourceTree = "<group>"; };
 		EE1F07822AC1D8900038BE8C /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		EEA9A1F22AB1C95E00B45518 /* Diploma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diploma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEA9A1F72AB1C95E00B45518 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EEA9A1F92AB1C95E00B45518 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
 		EEA9A1FC2AB1C95E00B45518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EEA9A1FE2AB1C95F00B45518 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEA9A2012AB1C95F00B45518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEA9A2032AB1C95F00B45518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EEF3295F2AE718AF00053CCA /* RegisterationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,29 +38,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF329652AE71AFF00053CCA /* FirebaseDatabase in Frameworks */,
 				EE1F078B2AC1D9AB0038BE8C /* RealmSwift in Frameworks */,
 				EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */,
 				EE1F077E2ABC9FC20038BE8C /* SnapKit in Frameworks */,
+				EEF329632AE71AFF00053CCA /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EE038AD02ACB52CF00B63927 /* Extra */ = {
-			isa = PBXGroup;
-			children = (
-				EE038ACE2ACB52C000B63927 /* FlexibleView.swift */,
-			);
-			path = Extra;
-			sourceTree = "<group>";
-		};
 		EE1F077B2ABC94B40038BE8C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EEA9A1F92AB1C95E00B45518 /* WelcomeController.swift */,
-				EE1F077F2AC1D7320038BE8C /* GameFieldController.swift */,
-				EE038ACC2ACB51B400B63927 /* SettingsController.swift */,
+				EEF3295F2AE718AF00053CCA /* RegisterationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -96,7 +84,6 @@
 		EEA9A1F42AB1C95E00B45518 /* Diploma */ = {
 			isa = PBXGroup;
 			children = (
-				EE038AD02ACB52CF00B63927 /* Extra */,
 				EE1F07812AC1D8580038BE8C /* Managers */,
 				EE1F077B2ABC94B40038BE8C /* ViewControllers */,
 				EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */,
@@ -129,6 +116,8 @@
 				EE1F077D2ABC9FC20038BE8C /* SnapKit */,
 				EE1F07882AC1D9AB0038BE8C /* Realm */,
 				EE1F078A2AC1D9AB0038BE8C /* RealmSwift */,
+				EEF329622AE71AFF00053CCA /* FirebaseAuth */,
+				EEF329642AE71AFF00053CCA /* FirebaseDatabase */,
 			);
 			productName = Diploma;
 			productReference = EEA9A1F22AB1C95E00B45518 /* Diploma.app */;
@@ -161,6 +150,7 @@
 			packageReferences = (
 				EE1F077C2ABC9FC20038BE8C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				EE1F07872AC1D9AB0038BE8C /* XCRemoteSwiftPackageReference "realm-swift" */,
+				EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = EEA9A1F32AB1C95E00B45518 /* Products */;
 			projectDirPath = "";
@@ -189,12 +179,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE1F07802AC1D7320038BE8C /* GameFieldController.swift in Sources */,
-				EEA9A1FA2AB1C95E00B45518 /* WelcomeController.swift in Sources */,
-				EE038ACD2ACB51B400B63927 /* SettingsController.swift in Sources */,
 				EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */,
+				EEF329602AE718AF00053CCA /* RegisterationViewController.swift in Sources */,
 				EEA9A1F62AB1C95E00B45518 /* AppDelegate.swift in Sources */,
-				EE038ACF2ACB52C000B63927 /* FlexibleView.swift in Sources */,
 				EEA9A1F82AB1C95E00B45518 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -431,6 +418,14 @@
 				kind = branch;
 			};
 		};
+		EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -448,6 +443,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EE1F07872AC1D9AB0038BE8C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		EEF329622AE71AFF00053CCA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		EEF329642AE71AFF00053CCA /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
