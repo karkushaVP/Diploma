@@ -11,18 +11,20 @@
 		EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1F07822AC1D8900038BE8C /* RealmManager.swift */; };
 		EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F07882AC1D9AB0038BE8C /* Realm */; };
 		EE1F078B2AC1D9AB0038BE8C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F078A2AC1D9AB0038BE8C /* RealmSwift */; };
+		EE71B8EB2AE9C1AC00BDCF32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE71B8EA2AE9C1AB00BDCF32 /* GoogleService-Info.plist */; };
 		EEA9A1F62AB1C95E00B45518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */; };
 		EEA9A1F82AB1C95E00B45518 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9A1F72AB1C95E00B45518 /* SceneDelegate.swift */; };
 		EEA9A1FD2AB1C95E00B45518 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA9A1FB2AB1C95E00B45518 /* Main.storyboard */; };
 		EEA9A1FF2AB1C95F00B45518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9A1FE2AB1C95F00B45518 /* Assets.xcassets */; };
 		EEA9A2022AB1C95F00B45518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA9A2002AB1C95F00B45518 /* LaunchScreen.storyboard */; };
-		EEF329602AE718AF00053CCA /* RegisterationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF3295F2AE718AF00053CCA /* RegisterationViewController.swift */; };
+		EEF329602AE718AF00053CCA /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF3295F2AE718AF00053CCA /* RegistrationViewController.swift */; };
 		EEF329632AE71AFF00053CCA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EEF329622AE71AFF00053CCA /* FirebaseAuth */; };
 		EEF329652AE71AFF00053CCA /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EEF329642AE71AFF00053CCA /* FirebaseDatabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EE1F07822AC1D8900038BE8C /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		EE71B8EA2AE9C1AB00BDCF32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEA9A1F22AB1C95E00B45518 /* Diploma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diploma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EEA9A1F72AB1C95E00B45518 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,7 +32,7 @@
 		EEA9A1FE2AB1C95F00B45518 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEA9A2012AB1C95F00B45518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EEA9A2032AB1C95F00B45518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EEF3295F2AE718AF00053CCA /* RegisterationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationViewController.swift; sourceTree = "<group>"; };
+		EEF3295F2AE718AF00053CCA /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +54,7 @@
 		EE1F077B2ABC94B40038BE8C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EEF3295F2AE718AF00053CCA /* RegisterationViewController.swift */,
+				EEF3295F2AE718AF00053CCA /* RegistrationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -91,6 +93,7 @@
 				EEA9A1FB2AB1C95E00B45518 /* Main.storyboard */,
 				EEA9A1FE2AB1C95F00B45518 /* Assets.xcassets */,
 				EEA9A2002AB1C95F00B45518 /* LaunchScreen.storyboard */,
+				EE71B8EA2AE9C1AB00BDCF32 /* GoogleService-Info.plist */,
 				EEA9A2032AB1C95F00B45518 /* Info.plist */,
 			);
 			path = Diploma;
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEA9A2022AB1C95F00B45518 /* LaunchScreen.storyboard in Resources */,
+				EE71B8EB2AE9C1AC00BDCF32 /* GoogleService-Info.plist in Resources */,
 				EEA9A1FF2AB1C95F00B45518 /* Assets.xcassets in Resources */,
 				EEA9A1FD2AB1C95E00B45518 /* Main.storyboard in Resources */,
 			);
@@ -180,7 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */,
-				EEF329602AE718AF00053CCA /* RegisterationViewController.swift in Sources */,
+				EEF329602AE718AF00053CCA /* RegistrationViewController.swift in Sources */,
 				EEA9A1F62AB1C95E00B45518 /* AppDelegate.swift in Sources */,
 				EEA9A1F82AB1C95E00B45518 /* SceneDelegate.swift in Sources */,
 			);
