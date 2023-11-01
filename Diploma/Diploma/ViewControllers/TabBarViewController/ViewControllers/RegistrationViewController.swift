@@ -11,11 +11,6 @@ import FirebaseAuth
 
 class RegistrationViewController: UIViewController {
     
-    private lazy var underImage: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
     private lazy var coverImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "registr"))
         imageView.contentMode = .scaleAspectFill
@@ -34,7 +29,9 @@ class RegistrationViewController: UIViewController {
     private lazy var loginStack: UIStackView = {
         let stack = UIStackView()
         stack.spacing = 15
+        stack.layer.cornerRadius = 10
         stack.axis = .vertical
+        stack.backgroundColor = .red.withAlphaComponent(0.7)
         return stack
     }()
     
@@ -100,8 +97,8 @@ class RegistrationViewController: UIViewController {
     }
     
     private func makeLayout() {
-        self.view.addSubview(underImage)
-        underImage.addSubview(coverImage)
+        
+        self.view.addSubview(coverImage)
         self.view.addSubview(mainLabel)
         self.view.addSubview(loginStack)
         loginStack.addArrangedSubview(loginInput)
@@ -113,7 +110,7 @@ class RegistrationViewController: UIViewController {
     
     private func makeConstraints() {
         
-        underImage.snp.makeConstraints { make in
+        coverImage.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -125,15 +122,26 @@ class RegistrationViewController: UIViewController {
         
         loginStack.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.leading.trailing.equalToSuperview().inset(16)
+            make.leading.equalToSuperview().inset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
         loginInput.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview().offset(-10)
             make.height.equalTo(40)
         }
         
         passwordInput.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview().offset(-10)
             make.height.equalTo(40)
+        }
+        
+        errorLabel.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(15)
+            make.bottom.equalToSuperview().offset(-10)
         }
         
         registrationButton.snp.makeConstraints { make in

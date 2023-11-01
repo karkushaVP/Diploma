@@ -11,6 +11,12 @@
 		EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1F07822AC1D8900038BE8C /* RealmManager.swift */; };
 		EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F07882AC1D9AB0038BE8C /* Realm */; };
 		EE1F078B2AC1D9AB0038BE8C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F078A2AC1D9AB0038BE8C /* RealmSwift */; };
+		EE67B8392AF30046008C95FC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B8382AF30046008C95FC /* ProfileViewController.swift */; };
+		EE67B83B2AF30059008C95FC /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83A2AF30059008C95FC /* CalendarViewController.swift */; };
+		EE67B83D2AF30073008C95FC /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83C2AF30073008C95FC /* ListsViewController.swift */; };
+		EE67B83F2AF300AF008C95FC /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83E2AF300AF008C95FC /* AddViewController.swift */; };
+		EE67B8422AF303F6008C95FC /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = EE67B8412AF303F6008C95FC /* FSCalendar */; };
+		EE67B8462AF30A1C008C95FC /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B8452AF30A1C008C95FC /* TabBarViewController.swift */; };
 		EE71B8EB2AE9C1AC00BDCF32 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EE71B8EA2AE9C1AB00BDCF32 /* GoogleService-Info.plist */; };
 		EEA9A1F62AB1C95E00B45518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */; };
 		EEA9A1F82AB1C95E00B45518 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEA9A1F72AB1C95E00B45518 /* SceneDelegate.swift */; };
@@ -24,6 +30,11 @@
 
 /* Begin PBXFileReference section */
 		EE1F07822AC1D8900038BE8C /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		EE67B8382AF30046008C95FC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EE67B83A2AF30059008C95FC /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		EE67B83C2AF30073008C95FC /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		EE67B83E2AF300AF008C95FC /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
+		EE67B8452AF30A1C008C95FC /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EE71B8EA2AE9C1AB00BDCF32 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEA9A1F22AB1C95E00B45518 /* Diploma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diploma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +52,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEF329652AE71AFF00053CCA /* FirebaseDatabase in Frameworks */,
+				EE67B8422AF303F6008C95FC /* FSCalendar in Frameworks */,
 				EE1F078B2AC1D9AB0038BE8C /* RealmSwift in Frameworks */,
 				EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */,
 				EE1F077E2ABC9FC20038BE8C /* SnapKit in Frameworks */,
@@ -54,7 +66,7 @@
 		EE1F077B2ABC94B40038BE8C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EEF3295F2AE718AF00053CCA /* RegistrationViewController.swift */,
+				EE67B8432AF309E5008C95FC /* TabBarViewController */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -65,6 +77,27 @@
 				EE1F07822AC1D8900038BE8C /* RealmManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		EE67B8432AF309E5008C95FC /* TabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EE67B8452AF30A1C008C95FC /* TabBarViewController.swift */,
+				EE67B8442AF309FC008C95FC /* ViewControllers */,
+			);
+			path = TabBarViewController;
+			sourceTree = "<group>";
+		};
+		EE67B8442AF309FC008C95FC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EEF3295F2AE718AF00053CCA /* RegistrationViewController.swift */,
+				EE67B8382AF30046008C95FC /* ProfileViewController.swift */,
+				EE67B83E2AF300AF008C95FC /* AddViewController.swift */,
+				EE67B83A2AF30059008C95FC /* CalendarViewController.swift */,
+				EE67B83C2AF30073008C95FC /* ListsViewController.swift */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		EEA9A1E92AB1C95E00B45518 = {
@@ -121,6 +154,7 @@
 				EE1F078A2AC1D9AB0038BE8C /* RealmSwift */,
 				EEF329622AE71AFF00053CCA /* FirebaseAuth */,
 				EEF329642AE71AFF00053CCA /* FirebaseDatabase */,
+				EE67B8412AF303F6008C95FC /* FSCalendar */,
 			);
 			productName = Diploma;
 			productReference = EEA9A1F22AB1C95E00B45518 /* Diploma.app */;
@@ -154,6 +188,7 @@
 				EE1F077C2ABC9FC20038BE8C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				EE1F07872AC1D9AB0038BE8C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				EE67B8402AF303F6008C95FC /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = EEA9A1F32AB1C95E00B45518 /* Products */;
 			projectDirPath = "";
@@ -183,8 +218,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE67B83D2AF30073008C95FC /* ListsViewController.swift in Sources */,
+				EE67B83B2AF30059008C95FC /* CalendarViewController.swift in Sources */,
+				EE67B83F2AF300AF008C95FC /* AddViewController.swift in Sources */,
 				EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */,
+				EE67B8462AF30A1C008C95FC /* TabBarViewController.swift in Sources */,
 				EEF329602AE718AF00053CCA /* RegistrationViewController.swift in Sources */,
+				EE67B8392AF30046008C95FC /* ProfileViewController.swift in Sources */,
 				EEA9A1F62AB1C95E00B45518 /* AppDelegate.swift in Sources */,
 				EEA9A1F82AB1C95E00B45518 /* SceneDelegate.swift in Sources */,
 			);
@@ -422,6 +462,14 @@
 				kind = branch;
 			};
 		};
+		EE67B8402AF303F6008C95FC /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -447,6 +495,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EE1F07872AC1D9AB0038BE8C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		EE67B8412AF303F6008C95FC /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE67B8402AF303F6008C95FC /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 		EEF329622AE71AFF00053CCA /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
