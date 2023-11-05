@@ -172,7 +172,7 @@ class RegistrationViewController: UIViewController {
             }
             
             self?.view.backgroundColor = .green
-//            self?.navigationController?.pushViewController(ProfileController(), animated: true)
+            self?.navigationController?.pushViewController(ProfileViewController(), animated: true)
         }
     }
     

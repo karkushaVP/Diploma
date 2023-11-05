@@ -11,16 +11,15 @@ class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupControllers()
     }
 
     func setupControllers() {
         var controllers: [UIViewController] = []
         
-        let profileVC = ProfileViewController()
-        controllers.append(UINavigationController(rootViewController: profileVC))
-        profileVC.tabBarItem = .init(title: "Image", image: .init(systemName: "person"), tag: 0)
+//        let profileVC = ProfileViewController()
+//        controllers.append(UINavigationController(rootViewController: profileVC))
+//        profileVC.tabBarItem = .init(title: "Image", image: .init(systemName: "person"), tag: 0)
         
         let addVC = AddViewController()
         controllers.append(UINavigationController(rootViewController: addVC))

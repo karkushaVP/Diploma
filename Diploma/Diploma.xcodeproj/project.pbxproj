@@ -11,6 +11,12 @@
 		EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1F07822AC1D8900038BE8C /* RealmManager.swift */; };
 		EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F07882AC1D9AB0038BE8C /* Realm */; };
 		EE1F078B2AC1D9AB0038BE8C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F078A2AC1D9AB0038BE8C /* RealmSwift */; };
+		EE4609E72AF8028C001CB687 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609E62AF8028C001CB687 /* Environment.swift */; };
+		EE4609EA2AF804A3001CB687 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609E92AF804A3001CB687 /* Task.swift */; };
+		EE4609ED2AF80FC4001CB687 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609EC2AF80FC4001CB687 /* Contact.swift */; };
+		EE4609F02AF81BAC001CB687 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609EF2AF81BAC001CB687 /* FirebaseAuth */; };
+		EE4609F22AF81BAC001CB687 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609F12AF81BAC001CB687 /* FirebaseDatabase */; };
+		EE4609F42AF81BAC001CB687 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609F32AF81BAC001CB687 /* FirebaseStorage */; };
 		EE67B8392AF30046008C95FC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B8382AF30046008C95FC /* ProfileViewController.swift */; };
 		EE67B83B2AF30059008C95FC /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83A2AF30059008C95FC /* CalendarViewController.swift */; };
 		EE67B83D2AF30073008C95FC /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83C2AF30073008C95FC /* ListsViewController.swift */; };
@@ -24,12 +30,13 @@
 		EEA9A1FF2AB1C95F00B45518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEA9A1FE2AB1C95F00B45518 /* Assets.xcassets */; };
 		EEA9A2022AB1C95F00B45518 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EEA9A2002AB1C95F00B45518 /* LaunchScreen.storyboard */; };
 		EEF329602AE718AF00053CCA /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEF3295F2AE718AF00053CCA /* RegistrationViewController.swift */; };
-		EEF329632AE71AFF00053CCA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EEF329622AE71AFF00053CCA /* FirebaseAuth */; };
-		EEF329652AE71AFF00053CCA /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EEF329642AE71AFF00053CCA /* FirebaseDatabase */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EE1F07822AC1D8900038BE8C /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		EE4609E62AF8028C001CB687 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		EE4609E92AF804A3001CB687 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		EE4609EC2AF80FC4001CB687 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		EE67B8382AF30046008C95FC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EE67B83A2AF30059008C95FC /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		EE67B83C2AF30073008C95FC /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
@@ -51,12 +58,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEF329652AE71AFF00053CCA /* FirebaseDatabase in Frameworks */,
+				EE4609F22AF81BAC001CB687 /* FirebaseDatabase in Frameworks */,
 				EE67B8422AF303F6008C95FC /* FSCalendar in Frameworks */,
+				EE4609F02AF81BAC001CB687 /* FirebaseAuth in Frameworks */,
 				EE1F078B2AC1D9AB0038BE8C /* RealmSwift in Frameworks */,
+				EE4609F42AF81BAC001CB687 /* FirebaseStorage in Frameworks */,
 				EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */,
 				EE1F077E2ABC9FC20038BE8C /* SnapKit in Frameworks */,
-				EEF329632AE71AFF00053CCA /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +85,15 @@
 				EE1F07822AC1D8900038BE8C /* RealmManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		EE4609E82AF80472001CB687 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EE4609E92AF804A3001CB687 /* Task.swift */,
+				EE4609EC2AF80FC4001CB687 /* Contact.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		EE67B8432AF309E5008C95FC /* TabBarViewController */ = {
@@ -119,10 +136,12 @@
 		EEA9A1F42AB1C95E00B45518 /* Diploma */ = {
 			isa = PBXGroup;
 			children = (
+				EE4609E82AF80472001CB687 /* Models */,
 				EE1F07812AC1D8580038BE8C /* Managers */,
 				EE1F077B2ABC94B40038BE8C /* ViewControllers */,
 				EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */,
 				EEA9A1F72AB1C95E00B45518 /* SceneDelegate.swift */,
+				EE4609E62AF8028C001CB687 /* Environment.swift */,
 				EEA9A1FB2AB1C95E00B45518 /* Main.storyboard */,
 				EEA9A1FE2AB1C95F00B45518 /* Assets.xcassets */,
 				EEA9A2002AB1C95F00B45518 /* LaunchScreen.storyboard */,
@@ -152,9 +171,10 @@
 				EE1F077D2ABC9FC20038BE8C /* SnapKit */,
 				EE1F07882AC1D9AB0038BE8C /* Realm */,
 				EE1F078A2AC1D9AB0038BE8C /* RealmSwift */,
-				EEF329622AE71AFF00053CCA /* FirebaseAuth */,
-				EEF329642AE71AFF00053CCA /* FirebaseDatabase */,
 				EE67B8412AF303F6008C95FC /* FSCalendar */,
+				EE4609EF2AF81BAC001CB687 /* FirebaseAuth */,
+				EE4609F12AF81BAC001CB687 /* FirebaseDatabase */,
+				EE4609F32AF81BAC001CB687 /* FirebaseStorage */,
 			);
 			productName = Diploma;
 			productReference = EEA9A1F22AB1C95E00B45518 /* Diploma.app */;
@@ -187,8 +207,8 @@
 			packageReferences = (
 				EE1F077C2ABC9FC20038BE8C /* XCRemoteSwiftPackageReference "SnapKit" */,
 				EE1F07872AC1D9AB0038BE8C /* XCRemoteSwiftPackageReference "realm-swift" */,
-				EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EE67B8402AF303F6008C95FC /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				EE4609EE2AF81BAC001CB687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = EEA9A1F32AB1C95E00B45518 /* Products */;
 			projectDirPath = "";
@@ -218,15 +238,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE4609ED2AF80FC4001CB687 /* Contact.swift in Sources */,
 				EE67B83D2AF30073008C95FC /* ListsViewController.swift in Sources */,
 				EE67B83B2AF30059008C95FC /* CalendarViewController.swift in Sources */,
 				EE67B83F2AF300AF008C95FC /* AddViewController.swift in Sources */,
 				EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */,
+				EE4609EA2AF804A3001CB687 /* Task.swift in Sources */,
 				EE67B8462AF30A1C008C95FC /* TabBarViewController.swift in Sources */,
 				EEF329602AE718AF00053CCA /* RegistrationViewController.swift in Sources */,
 				EE67B8392AF30046008C95FC /* ProfileViewController.swift in Sources */,
 				EEA9A1F62AB1C95E00B45518 /* AppDelegate.swift in Sources */,
 				EEA9A1F82AB1C95E00B45518 /* SceneDelegate.swift in Sources */,
+				EE4609E72AF8028C001CB687 /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,20 +485,20 @@
 				kind = branch;
 			};
 		};
+		EE4609EE2AF81BAC001CB687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		EE67B8402AF303F6008C95FC /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 2.0.0;
-			};
-		};
-		EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -496,20 +519,25 @@
 			package = EE1F07872AC1D9AB0038BE8C /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
+		EE4609EF2AF81BAC001CB687 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE4609EE2AF81BAC001CB687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		EE4609F12AF81BAC001CB687 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE4609EE2AF81BAC001CB687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		EE4609F32AF81BAC001CB687 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE4609EE2AF81BAC001CB687 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
 		EE67B8412AF303F6008C95FC /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = EE67B8402AF303F6008C95FC /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
-		};
-		EEF329622AE71AFF00053CCA /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		EEF329642AE71AFF00053CCA /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EEF329612AE71AFF00053CCA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
