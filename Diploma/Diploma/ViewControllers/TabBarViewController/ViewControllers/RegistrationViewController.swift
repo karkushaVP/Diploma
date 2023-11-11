@@ -26,13 +26,11 @@ class RegistrationViewController: UIViewController {
         return label
     }()
     
-    private lazy var loginStack: UIStackView = {
-        let stack = UIStackView()
-        stack.spacing = 15
-        stack.layer.cornerRadius = 10
-        stack.axis = .vertical
-        stack.backgroundColor = .red.withAlphaComponent(0.7)
-        return stack
+    private lazy var loginView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.backgroundColor = .white.withAlphaComponent(0.7)
+        return view
     }()
     
     private lazy var loginInput: UITextField = {
@@ -61,8 +59,8 @@ class RegistrationViewController: UIViewController {
         let label = UILabel()
         label.textColor = .red
         label.text = "Неверный логин или пароль"
-        label.font = .systemFont(ofSize: 10)
-        label.isHidden = false
+        label.font = .systemFont(ofSize: 13)
+        label.isHidden = true
         return label
     }()
     
@@ -88,6 +86,8 @@ class RegistrationViewController: UIViewController {
         super.viewDidLoad()
         makeLayout()
         makeConstraints()
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+//        view.addGestureRecognizer(tap)
         
         if let userId = Auth.auth().currentUser?.uid {
             print("Залогинен пользователь: \(userId)")
@@ -100,10 +100,10 @@ class RegistrationViewController: UIViewController {
         
         self.view.addSubview(coverImage)
         self.view.addSubview(mainLabel)
-        self.view.addSubview(loginStack)
-        loginStack.addArrangedSubview(loginInput)
-        loginStack.addArrangedSubview(passwordInput)
-        loginStack.addArrangedSubview(errorLabel)
+        self.view.addSubview(loginView)
+        loginView.addSubview(loginInput)
+        loginView.addSubview(passwordInput)
+        self.view.addSubview(errorLabel)
         self.view.addSubview(loginButton)
         self.view.addSubview(registrationButton)
     }
@@ -120,7 +120,7 @@ class RegistrationViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(55)
         }
         
-        loginStack.snp.makeConstraints { make in
+        loginView.snp.makeConstraints { make in
             make.center.equalToSuperview()
             make.leading.equalToSuperview().inset(16)
             make.trailing.equalToSuperview().offset(-16)
@@ -132,16 +132,19 @@ class RegistrationViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-10)
             make.height.equalTo(40)
         }
-        
+//
         passwordInput.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().offset(-10)
+            make.top.equalTo(loginInput.snp.bottom).offset(10)
+            make.leading.equalTo(loginInput.snp.leading)
+            make.trailing.equalTo(loginInput.snp.trailing)
+            make.bottom.equalToSuperview().offset(-10)
             make.height.equalTo(40)
         }
         
         errorLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(15)
-            make.bottom.equalToSuperview().offset(-10)
+            make.top.equalTo(loginView.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().offset(-25)
         }
         
         registrationButton.snp.makeConstraints { make in
@@ -166,13 +169,10 @@ class RegistrationViewController: UIViewController {
             guard error == nil,
                   let result
             else {
-                print(error!.localizedDescription)
-                self?.view.backgroundColor = .red
+                self?.errorLabel.isHidden = false
                 return
             }
-            
-            self?.view.backgroundColor = .green
-            self?.navigationController?.pushViewController(ProfileViewController(), animated: true)
+            UIApplication.shared.keyWindow?.rootViewController = TabBarViewController(currentUserId: result.user.uid)
         }
     }
     
@@ -189,8 +189,19 @@ class RegistrationViewController: UIViewController {
                 self?.view.backgroundColor = .red
                 return
             }
-            
-            self?.view.backgroundColor = .green
+            self?.present(ProfileViewController(mode: .create), animated:true, completion: nil)
         }
+    }
+}
+
+extension RegistrationViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

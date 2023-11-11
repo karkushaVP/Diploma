@@ -11,7 +11,7 @@ import PhotosUI
 
 enum ControllerMode {
     case create
-    case edit(Editable)
+    case read(String)
 }
 
 class ProfileViewController: UIViewController {
@@ -20,7 +20,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var avatarImageView: UIImageView = {
         let image = UIImageView()
-        image.layer.cornerRadius = 100
+        image.layer.cornerRadius = 20
         image.layer.borderWidth = 1
         image.contentMode = .scaleAspectFill
         image.layer.borderColor = UIColor.lightGray.cgColor
@@ -29,7 +29,7 @@ class ProfileViewController: UIViewController {
         image.clipsToBounds = true
         return image
     }()
-
+    
     private lazy var nameInput: UITextField = {
         let input = UITextField()
         input.layer.cornerRadius = 12
@@ -91,22 +91,23 @@ class ProfileViewController: UIViewController {
         
         avatarImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.leading.equalToSuperview().inset(16)
-            make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(60)
-            make.width.equalTo(60)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(25)
+            make.height.equalTo(160)
+            make.width.equalTo(160)
         }
         
         nameInput.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.top.equalTo(avatarImageView.snp.bottom).offset(25)
+            make.height.equalTo(40)
         }
         
         surnameInput.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.top.equalTo(nameInput.snp.bottom).offset(10)
+            make.height.equalTo(40)
         }
         
         saveButton.snp.makeConstraints { make in
@@ -138,7 +139,6 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func avatarTapAction() {
-        print("Select image dialog")
         var config = PHPickerConfiguration(photoLibrary: .shared())
         config.selectionLimit = 1
         config.filter = PHPickerFilter.any(of: [.images])
@@ -150,24 +150,17 @@ class ProfileViewController: UIViewController {
     private func setupControllerMode() {
         switch mode {
         case .create:
-            title = "Создать контакт"
-        case .edit(let editable):
-            title = "Изменить контакт"
-
-            guard let user = Auth.auth().currentUser,
-                  let contactId = editable.id
-            else { return }
-            Environment.ref.child("users/\(user.uid)/contacts/\(contactId)").observeSingleEvent(of: .value) { [weak self] snapshot in
+            title = "Создать профиль"
+        case .read(let id):
+            title = "Профиль"
+            Environment.ref.child("users/\(id)/contacts/\(id)").observeSingleEvent(of: .value) { [weak self] (snapshot,arg)  in
                 guard let contactValue = snapshot.value as? [String: Any],
-                      let contactForEdit = try? Contact(key: contactId, dict: contactValue)
+                      let contactForRead = try? Contact(key: id, dict: contactValue)
                 else { return }
-                
-                self?.nameInput.text = contactForEdit.name
-                self?.surnameInput.text = contactForEdit.surname
+                self?.nameInput.text = contactForRead.name
+                self?.surnameInput.text = contactForRead.surname
             }
-            
-            let child = Environment.storage.child("images/\(user.uid).jpg")
-
+            let child = Environment.storage.child("images/\(id).jpg")
             child.downloadURL { (url, error) in
                 DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                     guard let url,
@@ -179,7 +172,7 @@ class ProfileViewController: UIViewController {
                     }
                 }
             }
-                
+            
             let addButton = UIButton(type: .system)
             addButton.addTarget(self, action: #selector(deleteContact), for: .touchUpInside)
             addButton.setImage(UIImage(systemName: "trash"), for: .normal)
@@ -191,12 +184,10 @@ class ProfileViewController: UIViewController {
         switch mode {
         case .create:
             break
-        case .edit(let editable):
-            
-            guard let user = Auth.auth().currentUser,
-                  let contactId = editable.id
+        case .read(let id):
+            guard let user = Auth.auth().currentUser
             else { return }
-            Environment.ref.child("users/\(user.uid)/contacts/\(contactId)").removeValue()
+            Environment.ref.child("users/\(user.uid)/contacts/\(id)").removeValue()
             navigationController?.popViewController(animated: true)
         }
     }
@@ -204,7 +195,8 @@ class ProfileViewController: UIViewController {
     @objc private func saveContactAction() {
         guard let name = nameInput.text,
               let surname = surnameInput.text,
-              let user = Auth.auth().currentUser
+              let user = Auth.auth().currentUser,
+              let image = avatarImageView.image?.jpegData(compressionQuality: 0.5)
         else { return }
         
         let contact = Contact(
@@ -215,24 +207,24 @@ class ProfileViewController: UIViewController {
         switch mode {
         case .create:
             Environment.ref.child("users/\(user.uid)/contacts").childByAutoId().setValue(contact.asDict)
-        case .edit(let editable):
-            guard let id = editable.id else { return }
-            Environment.ref.child("users/\(user.uid)/contacts/\(id)").updateChildValues(contact.asDict)
+            saveAvatar(imageData: image)
+            dismiss(animated: true)
+        case .read(let id):
+            Environment.ref.child("users/\(user.uid)/contacts").updateChildValues(contact.asDict)
         }
-        
     }
     
     @objc private func saveAvatar(imageData: Data) {
         guard let user = Auth.auth().currentUser else { return }
-        
         let child = Environment.storage.child("\(user.uid)/\(UUID().uuidString).jpg")
-//        _ = child.putData(imageData, metadata: nil) { (metadata, error) in
-//            guard metadata != nil else {
-//                print("Картинка не была загружена")
-//                return
-//            }
+        _ = child.putData(imageData, metadata: nil) { (metadata, error) in
+            guard metadata != nil else {
+                print("Картинка не была загружена")
+                return
+            }
         }
     }
+}
 
 extension ProfileViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -243,8 +235,6 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
                       error == nil,
                       let imageData = image.jpegData(compressionQuality: 1)
                 else { return }
-    
-                self?.saveAvatar(imageData: imageData)
                 DispatchQueue.main.async { [weak self] in
                     self?.avatarImageView.image = image
                 }

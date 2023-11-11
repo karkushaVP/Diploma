@@ -36,10 +36,10 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     private func makeConstraints() {
         calendar.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20) // Adjust the top offset as needed.
-            make.leading.equalToSuperview().offset(16) // Adjust the leading offset as needed.
-            make.trailing.equalToSuperview().offset(-16) // Adjust the trailing offset as needed.
-            make.bottom.equalToSuperview().offset(-20) // Adjust the bottom offset as needed.
+            make.top.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-20)
         }
     }
 }

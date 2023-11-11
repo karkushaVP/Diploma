@@ -10,7 +10,7 @@ import FirebaseAuth
 
 //enum ControllerMode {
 //    case create
-//    case edit(Editable)
+//    case edit
 //}
 
 class AddViewController: UIViewController {
