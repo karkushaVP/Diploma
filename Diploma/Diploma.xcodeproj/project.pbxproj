@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE09A0062B00FED00096EEB7 /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE09A0052B00FED00096EEB7 /* PopupViewController.swift */; };
 		EE1F077E2ABC9FC20038BE8C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F077D2ABC9FC20038BE8C /* SnapKit */; };
 		EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1F07822AC1D8900038BE8C /* RealmManager.swift */; };
 		EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F07882AC1D9AB0038BE8C /* Realm */; };
@@ -19,7 +20,7 @@
 		EE4609F42AF81BAC001CB687 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609F32AF81BAC001CB687 /* FirebaseStorage */; };
 		EE67B8392AF30046008C95FC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B8382AF30046008C95FC /* ProfileViewController.swift */; };
 		EE67B83B2AF30059008C95FC /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83A2AF30059008C95FC /* CalendarViewController.swift */; };
-		EE67B83D2AF30073008C95FC /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83C2AF30073008C95FC /* ListsViewController.swift */; };
+		EE67B83D2AF30073008C95FC /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83C2AF30073008C95FC /* TasksViewController.swift */; };
 		EE67B83F2AF300AF008C95FC /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B83E2AF300AF008C95FC /* AddViewController.swift */; };
 		EE67B8422AF303F6008C95FC /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = EE67B8412AF303F6008C95FC /* FSCalendar */; };
 		EE67B8462AF30A1C008C95FC /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE67B8452AF30A1C008C95FC /* TabBarViewController.swift */; };
@@ -35,13 +36,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EE09A0052B00FED00096EEB7 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		EE1F07822AC1D8900038BE8C /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		EE4609E62AF8028C001CB687 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		EE4609E92AF804A3001CB687 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		EE4609EC2AF80FC4001CB687 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		EE67B8382AF30046008C95FC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EE67B83A2AF30059008C95FC /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		EE67B83C2AF30073008C95FC /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
+		EE67B83C2AF30073008C95FC /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
 		EE67B83E2AF300AF008C95FC /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		EE67B8452AF30A1C008C95FC /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		EE6AB8752AFFC10B007B7226 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
@@ -75,6 +77,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE09A0042B00FEAB0096EEB7 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				EE09A0052B00FED00096EEB7 /* PopupViewController.swift */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
 		EE1F077B2ABC94B40038BE8C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,7 +127,8 @@
 				EE67B8382AF30046008C95FC /* ProfileViewController.swift */,
 				EE67B83E2AF300AF008C95FC /* AddViewController.swift */,
 				EE67B83A2AF30059008C95FC /* CalendarViewController.swift */,
-				EE67B83C2AF30073008C95FC /* ListsViewController.swift */,
+				EE67B83C2AF30073008C95FC /* TasksViewController.swift */,
+				EE09A0042B00FEAB0096EEB7 /* Popup */,
 				EE6AB8772AFFC113007B7226 /* Cells */,
 			);
 			path = ViewControllers;
@@ -253,10 +264,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE4609ED2AF80FC4001CB687 /* Contact.swift in Sources */,
-				EE67B83D2AF30073008C95FC /* ListsViewController.swift in Sources */,
+				EE67B83D2AF30073008C95FC /* TasksViewController.swift in Sources */,
 				EE67B83B2AF30059008C95FC /* CalendarViewController.swift in Sources */,
 				EE67B83F2AF300AF008C95FC /* AddViewController.swift in Sources */,
 				EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */,
+				EE09A0062B00FED00096EEB7 /* PopupViewController.swift in Sources */,
 				EE4609EA2AF804A3001CB687 /* Task.swift in Sources */,
 				EE67B8462AF30A1C008C95FC /* TabBarViewController.swift in Sources */,
 				EEF329602AE718AF00053CCA /* RegistrationViewController.swift in Sources */,

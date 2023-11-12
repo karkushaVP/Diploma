@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Contact: Editable {
+struct Contact {
     var id: String?
     let name: String
     let surname: String

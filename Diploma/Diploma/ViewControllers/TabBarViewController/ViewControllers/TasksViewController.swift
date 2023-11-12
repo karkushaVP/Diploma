@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ListsViewController: UIViewController {
+class TasksViewController: UIViewController {
     
 //    var lists = [String]()
     var lists = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10"]
@@ -21,6 +21,17 @@ class ListsViewController: UIViewController {
         collection.backgroundColor = .white
         return collection
     }()
+    
+    private lazy var deleteButton: UIBarButtonItem = {
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "trash"), for: .normal)
+        button.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
+        
+        let barButton = UIBarButtonItem(customView: button)
+        navigationItem.rightBarButtonItem = barButton
+        
+        return barButton
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +39,8 @@ class ListsViewController: UIViewController {
         setupCollection()
         makeLayout()
         makeConstraints()
+        title = "Мои задачи"
+        tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemTeal], for: .normal)
     }
     
     private func setupCollection() {
@@ -39,6 +52,7 @@ class ListsViewController: UIViewController {
     
     private func makeLayout() {
         self.view.addSubview(collection)
+        self.navigationItem.rightBarButtonItem = deleteButton
     }
     
     private func makeConstraints() {
@@ -49,12 +63,22 @@ class ListsViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide).offset(15)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
         }
+    }
+    
+    @objc private func deleteTask() {
+        //процесс удаления...
         
+        PopupViewController.show(style: .confirm(
+            title: "Вы уверены, что хотите удалить?",
+            subtitle: "После удаления задача не подлежит восстановлению, вы не сможете просмотреть ее снова."
+        )) {
+            print("Вызвано подтверждение")
+        }
     }
 
 }
 
-extension ListsViewController: UICollectionViewDataSource {
+extension TasksViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return lists.count
@@ -67,7 +91,7 @@ extension ListsViewController: UICollectionViewDataSource {
     }
 }
 
-extension ListsViewController: UICollectionViewDelegate {
+extension TasksViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //        let contact = data[indexPath.row]
         //        if !contact.isChecked {
@@ -80,7 +104,7 @@ extension ListsViewController: UICollectionViewDelegate {
     }
 }
     
-extension ListsViewController: UICollectionViewDelegateFlowLayout {
+extension TasksViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let padding: CGFloat =  50
         let collectionViewSize = collectionView.frame.size.width - padding

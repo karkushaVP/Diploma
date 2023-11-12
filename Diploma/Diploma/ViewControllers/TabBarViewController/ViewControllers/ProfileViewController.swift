@@ -21,9 +21,9 @@ class ProfileViewController: UIViewController {
     private lazy var avatarImageView: UIImageView = {
         let image = UIImageView()
         image.layer.cornerRadius = 20
-        image.layer.borderWidth = 1
+        image.layer.borderWidth = 2
         image.contentMode = .scaleAspectFill
-        image.layer.borderColor = UIColor.lightGray.cgColor
+        image.layer.borderColor = UIColor.systemTeal.cgColor
         image.image = UIImage(systemName: "gear")
         image.isUserInteractionEnabled = true
         image.clipsToBounds = true
@@ -32,28 +32,32 @@ class ProfileViewController: UIViewController {
     
     private lazy var nameInput: UITextField = {
         let input = UITextField()
-        input.layer.cornerRadius = 12
-        input.layer.borderColor = UIColor.lightGray.cgColor
-        input.layer.borderWidth = 1
+        input.layer.cornerRadius = 10
+        input.layer.borderColor = UIColor.systemTeal.cgColor
+        input.layer.borderWidth = 2
         input.leftViewMode = .always
         input.leftView = UIView(frame: .init(x: 0, y: 0, width: 10, height: 0))
+        input.placeholder = "Введите имя"
         return input
     }()
     
     private lazy var surnameInput: UITextField = {
         let input = UITextField()
-        input.layer.cornerRadius = 12
-        input.layer.borderColor = UIColor.lightGray.cgColor
-        input.layer.borderWidth = 1
+        input.layer.cornerRadius = 10
+        input.layer.borderColor = UIColor.systemTeal.cgColor
+        input.layer.borderWidth = 2
         input.leftViewMode = .always
         input.leftView = UIView(frame: .init(x: 0, y: 0, width: 10, height: 0))
+        input.placeholder = "Введите фамилию"
         return input
     }()
     
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Сохранить", for: .normal)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.backgroundColor = .systemTeal.withAlphaComponent(0.5)
         button.addTarget(
             self,
             action: #selector(saveContactAction),
@@ -69,6 +73,7 @@ class ProfileViewController: UIViewController {
         makeConstraints()
         setupControllerMode()
         setupGestures()
+        tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemTeal], for: .normal)
     }
     
     init(mode: ControllerMode) {
@@ -151,8 +156,9 @@ class ProfileViewController: UIViewController {
         switch mode {
         case .create:
             title = "Создать профиль"
+            
         case .read(let id):
-            title = "Профиль"
+            title = "Мой профиль"
             Environment.ref.child("users/\(id)/contacts/\(id)").observeSingleEvent(of: .value) { [weak self] (snapshot,arg)  in
                 guard let contactValue = snapshot.value as? [String: Any],
                       let contactForRead = try? Contact(key: id, dict: contactValue)

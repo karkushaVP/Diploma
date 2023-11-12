@@ -67,6 +67,7 @@ class RegistrationViewController: UIViewController {
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Войти", for: .normal)
+//        button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
         button.backgroundColor = .systemTeal.withAlphaComponent(0.5)
         button.addTarget(self, action: #selector(login), for: .touchUpInside)

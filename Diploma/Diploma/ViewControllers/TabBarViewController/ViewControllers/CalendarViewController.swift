@@ -20,7 +20,9 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         makeLayout()
         makeConstraints()
         calendarSettings()
+        title = "Календарь"
         self.view.backgroundColor = .white
+        tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemTeal], for: .normal)
     }
     
     private func calendarSettings() {
