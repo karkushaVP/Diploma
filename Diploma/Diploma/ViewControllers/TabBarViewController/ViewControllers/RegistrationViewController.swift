@@ -28,14 +28,14 @@ class RegistrationViewController: UIViewController {
     
     private lazy var loginView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 10
+        view.layer.cornerRadius = 12
         view.backgroundColor = .white.withAlphaComponent(0.7)
         return view
     }()
     
     private lazy var loginInput: UITextField = {
         let input = UITextField()
-        input.layer.cornerRadius = 10
+        input.layer.cornerRadius = 12
         input.layer.borderColor = UIColor.systemTeal.cgColor
         input.layer.borderWidth = 2
         input.leftViewMode = .always
@@ -46,7 +46,7 @@ class RegistrationViewController: UIViewController {
     
     private lazy var passwordInput: UITextField = {
         let input = UITextField()
-        input.layer.cornerRadius = 10
+        input.layer.cornerRadius = 12
         input.layer.borderColor = UIColor.systemTeal.cgColor
         input.layer.borderWidth = 2
         input.leftViewMode = .always
@@ -68,7 +68,7 @@ class RegistrationViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Войти", for: .normal)
 //        button.setTitleColor(.black, for: .normal)
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 12
         button.backgroundColor = .systemTeal.withAlphaComponent(0.5)
         button.addTarget(self, action: #selector(login), for: .touchUpInside)
         return button
@@ -77,7 +77,7 @@ class RegistrationViewController: UIViewController {
     private lazy var registrationButton: UIButton = {
         let button = UIButton()
         button.setTitle("Регистрация", for: .normal)
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 12
         button.backgroundColor = .systemTeal.withAlphaComponent(0.5)
         button.addTarget(self, action: #selector(registration), for: .touchUpInside)
         return button

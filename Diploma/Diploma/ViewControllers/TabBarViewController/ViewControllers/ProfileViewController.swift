@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var nameInput: UITextField = {
         let input = UITextField()
-        input.layer.cornerRadius = 10
+        input.layer.cornerRadius = 12
         input.layer.borderColor = UIColor.systemTeal.cgColor
         input.layer.borderWidth = 2
         input.leftViewMode = .always
@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var surnameInput: UITextField = {
         let input = UITextField()
-        input.layer.cornerRadius = 10
+        input.layer.cornerRadius = 12
         input.layer.borderColor = UIColor.systemTeal.cgColor
         input.layer.borderWidth = 2
         input.leftViewMode = .always
@@ -56,7 +56,7 @@ class ProfileViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Сохранить", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 12
         button.backgroundColor = .systemTeal.withAlphaComponent(0.5)
         button.addTarget(
             self,
@@ -195,6 +195,24 @@ class ProfileViewController: UIViewController {
             else { return }
             Environment.ref.child("users/\(user.uid)/contacts/\(id)").removeValue()
             navigationController?.popViewController(animated: true)
+            
+            PopupViewController.show(style: .confirm(
+                title: "Вы уверены, что хотите удалить профиль и все его данные?",
+                subtitle: "После удаления профиль не подлежит восстановлению, вы не сможете использовать его снова."
+            )) {
+                if let user = Auth.auth().currentUser {
+                    user.delete { error in
+                        if let error = error {
+                            print("Error deleting user: \(error.localizedDescription)")
+                        } else {
+                            print("User deleted successfully.")
+                        }
+                    }
+                }
+                UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
+                print("Вызвано подтверждение")
+            }
+            
         }
     }
     
@@ -216,7 +234,14 @@ class ProfileViewController: UIViewController {
             saveAvatar(imageData: image)
             dismiss(animated: true)
         case .read(let id):
-            Environment.ref.child("users/\(user.uid)/contacts").updateChildValues(contact.asDict)
+            Environment.ref.child("users/\(user.uid)/contacts/\(id)").observe(.value) { snapshot in
+                guard let contactData = snapshot.value as? [String: Any] else {
+                    // ??????????????
+                    return
+                }
+                self.nameInput.text = contactData["name"] as? String
+                self.surnameInput.text = contactData["surname"] as? String
+            }
         }
     }
     

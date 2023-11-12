@@ -44,6 +44,6 @@ struct Task {
 }
 //extension String: Error {}
 //
-//protocol Editable {
+//protocol Editabl {
 //    var id: String? { get }
 //}
