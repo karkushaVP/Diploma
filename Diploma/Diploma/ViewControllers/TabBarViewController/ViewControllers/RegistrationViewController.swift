@@ -58,7 +58,7 @@ class RegistrationViewController: UIViewController {
     private lazy var errorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .red
-        label.text = "Неверный логин или пароль"
+        label.numberOfLines = 3
         label.font = .systemFont(ofSize: 13)
         label.isHidden = true
         return label
@@ -171,6 +171,8 @@ class RegistrationViewController: UIViewController {
                   let result
             else {
                 self?.errorLabel.isHidden = false
+                self?.errorLabel.text = "Неверный логин или пароль"
+                self?.startErrorLabelTimer()
                 return
             }
             UIApplication.shared.keyWindow?.rootViewController = TabBarViewController(currentUserId: result.user.uid)
@@ -187,10 +189,48 @@ class RegistrationViewController: UIViewController {
                   let result
             else {
                 print(error!.localizedDescription)
-                self?.view.backgroundColor = .red
+                self?.errorLabel.isHidden = false
+                self?.errorLabel.text = "Проверьте написание логина и пароля:\n1) используйте существующую почту\n2) пароль должен состоять минимум 6 знаков"
+                self?.startErrorLabelTimer()
                 return
             }
             self?.present(ProfileViewController(mode: .create), animated:true, completion: nil)
+        }
+    }
+    
+    private func startErrorLabelTimer() {
+        // Hide error label after 3 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+            self?.hideErrorLabel()
+        }
+        
+        // Shake animation on error label
+        let shakeAnimation = CAKeyframeAnimation(keyPath: "position")
+        shakeAnimation.values = [
+            NSValue(cgPoint: CGPoint(x: self.errorLabel.center.x , y: self.errorLabel.center.y )),
+            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) - 10, y: self.errorLabel.center.y )),
+            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) + 10, y: self.errorLabel.center.y )),
+            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) - 10, y: self.errorLabel.center.y )),
+            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) + 10, y: self.errorLabel.center.y )),
+            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) - 10, y: self.errorLabel.center.y )),
+            NSValue(cgPoint: CGPoint(x: self.errorLabel.center.x , y: self.errorLabel.center.y ))
+        ]
+        shakeAnimation.timingFunctions = [
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        ]
+        shakeAnimation.duration = 0.7
+        self.errorLabel.layer.add(shakeAnimation, forKey: "position")
+    }
+
+    private func hideErrorLabel() {
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.errorLabel.isHidden = true
         }
     }
 }
