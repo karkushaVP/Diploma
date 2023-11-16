@@ -28,8 +28,9 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     private func calendarSettings() {
         calendar.appearance.headerTitleColor = .systemTeal
         calendar.appearance.weekdayTextColor = .systemTeal
-        calendar.appearance.titleTodayColor = .systemTeal
-
+        calendar.appearance.titleTodayColor = .black
+        calendar.appearance.todayColor = .systemTeal
+        calendar.appearance.selectionColor = UIColor.systemTeal.withAlphaComponent(0.5)
     }
 
     private func makeLayout() {
@@ -38,10 +39,10 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     
     private func makeConstraints() {
         calendar.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.bottom.equalToSuperview().offset(-20)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
     }
 }

@@ -7,15 +7,17 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 class CollectionViewCell: UICollectionViewCell {
     
     static let id = String(describing: CollectionViewCell.self)
     
-    lazy var listNameLabel: UILabel = {
+    lazy var taskNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "List"
+        label.text = "Task"
+        label.numberOfLines = 3
         label.textColor = .systemTeal
         label.font = UIFont.italicSystemFont(ofSize: 25.0)
         return label
@@ -33,14 +35,19 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     private func makeLayout() {
-        contentView.addSubview(listNameLabel)
+        contentView.addSubview(taskNameLabel)
     }
     
     private func makeConstraints() {
         
-        listNameLabel.snp.makeConstraints { make in
+        taskNameLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+    }
+    
+    func set(element: Element) {
+        taskNameLabel.text = element.notificationName
+//        infoLabel.text = element.notificationText
     }
     
     func setupCell() {
@@ -50,3 +57,4 @@ class CollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .systemTeal.withAlphaComponent(0.3)
     }
 }
+

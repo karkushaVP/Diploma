@@ -7,10 +7,11 @@
 
 import UIKit
 import FirebaseAuth
+import Combine
 
 class AddViewController: UIViewController, UITextViewDelegate {
     
-    var lists = [ListModel]()
+    var notifications: [Element] = []
     
     private lazy var nameTaskInput: UITextField = {
         let input = UITextField()
@@ -22,29 +23,6 @@ class AddViewController: UIViewController, UITextViewDelegate {
         input.placeholder = "Заголовок задачи"
         return input
     }()
-    
-    private lazy var taskInput: UITextField = {
-        let input = UITextField()
-        input.layer.cornerRadius = 12
-        input.layer.borderColor = UIColor.systemTeal.cgColor
-        input.layer.borderWidth = 2
-        input.leftViewMode = .always
-        input.leftView = UIView(frame: .init(x: 0, y: 0, width: 10, height: 0))
-        input.placeholder = "Что нужно сделать?"
-        return input
-    }()
-    
-//    private lazy var taskInput: UITextView = {
-//        let input = UITextView()
-//        input.layer.cornerRadius = 12
-//        input.layer.borderColor = UIColor.systemTeal.cgColor
-//        input.layer.borderWidth = 2
-//        input.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5) // Adjusting text inset
-//        input.textContainer.lineFragmentPadding = 5 // Padding for text
-//        input.text = "Что нужно сделать?"
-//        input.textColor = .black// Placeholder color
-//        return input
-//    }()
     
     private let taskInput: UITextView = {
             let textView = UITextView()
@@ -59,6 +37,11 @@ class AddViewController: UIViewController, UITextViewDelegate {
             return textView
         }()
     
+    private lazy var datePicker: UIDatePicker = {
+       let picker = UIDatePicker()
+        return picker
+    }()
+    
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Сохранить", for: .normal)
@@ -70,8 +53,6 @@ class AddViewController: UIViewController, UITextViewDelegate {
                     action: #selector(saveTaskAction),
                     for: .touchUpInside
                 )
-        
-        //        ТАСК: открыть по нажатию на кнопку с поп ап контроллером и выбрать в какой лист добавить данную задачу или создать новый лист и сохранить это в файер бейз
         return button
     }()
     
@@ -81,14 +62,17 @@ class AddViewController: UIViewController, UITextViewDelegate {
         setupLayout()
         makeConstraints()
         title = "Создать задачу"
+        
         tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemTeal], for: .normal)
         
-        //        setupControllerMode()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     private func setupLayout() {
         self.view.addSubview(nameTaskInput)
         self.view.addSubview(taskInput)
+        self.view.addSubview(datePicker)
         self.view.addSubview(saveButton)
         taskInput.delegate = self
     }
@@ -112,7 +96,12 @@ class AddViewController: UIViewController, UITextViewDelegate {
         taskInput.snp.makeConstraints { make in
             make.top.equalTo(nameTaskInput.snp.bottom).inset(-20)
             make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(170)
+            make.bottom.equalTo(datePicker.snp.top).offset(-20)
+        }
+        
+        datePicker.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalTo(saveButton.snp.top).offset(-20)
         }
         
         saveButton.snp.makeConstraints { make in
@@ -124,16 +113,42 @@ class AddViewController: UIViewController, UITextViewDelegate {
     
     
     @objc private func saveTaskAction() {
-        guard let name = nameTaskInput.text,
-              let task = taskInput.text,
-              let user = Auth.auth().currentUser
-        else { return }
         
-//        let task = Task(
-//            id: nil,
-//            name: name,
-//            task: task)
-//        
-//        Environment.ref.child("users/\(user.uid)/contacts/\(id)/tasks/\(id)").childByAutoId().setValue(task.asDict)
+        let date = datePicker.date
+        
+        guard let title = nameTaskInput.text else {
+            print("there is no title")
+            return
+        }
+        guard let subTitle = taskInput.text else {
+            print("there is no subtitle")
+            return
+        }
+        
+        let localPush = LocalPush(
+            title: title,
+            subtitle: subTitle,
+            date: date,
+            repeats: false
+        )
+        
+        PushManager().createPushFrom(push: localPush)
+        let notification = Element()
+        notification.notificationName = title
+        notification.notificationText = subTitle
+        notifications.append(notification)
+        RealmManager().write(notification)
+    }
+}
+
+extension AddViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

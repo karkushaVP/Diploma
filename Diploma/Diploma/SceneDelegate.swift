@@ -11,14 +11,16 @@ import FirebaseAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var pushManager = PushManager()
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        pushManager.checkPermission()
         if let loggedUser = Auth.auth().currentUser?.uid {
             guard let windowScene = (scene as? UIWindowScene) else { return }
             window = UIWindow(windowScene: windowScene)
             window?.windowScene = windowScene
-            window?.rootViewController = UINavigationController(rootViewController: AddViewController())
+            window?.rootViewController = UINavigationController(rootViewController: RegistrationViewController())
             window?.makeKeyAndVisible()
         } else {
             guard let windowScene = (scene as? UIWindowScene) else { return }

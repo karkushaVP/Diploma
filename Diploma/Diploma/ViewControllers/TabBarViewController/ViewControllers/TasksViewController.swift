@@ -7,11 +7,11 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 class TasksViewController: UIViewController {
-    
-//    var lists = [String]()
-    var lists = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10"]
+
+    var notifications: [Element] = []
     
     private lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -22,16 +22,16 @@ class TasksViewController: UIViewController {
         return collection
     }()
     
-    private lazy var deleteButton: UIBarButtonItem = {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "trash"), for: .normal)
-        button.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
-        
-        let barButton = UIBarButtonItem(customView: button)
-        navigationItem.rightBarButtonItem = barButton
-        
-        return barButton
-    }()
+//    private lazy var deleteButton: UIBarButtonItem = {
+//        let button = UIButton(type: .custom)
+//        button.setImage(UIImage(systemName: "trash"), for: .normal)
+//        button.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
+//        
+//        let barButton = UIBarButtonItem(customView: button)
+//        navigationItem.rightBarButtonItem = barButton
+//        
+//        return barButton
+//    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,12 @@ class TasksViewController: UIViewController {
         tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemTeal], for: .normal)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notifications = RealmManager<Element>().read()
+        collection.reloadData()
+    }
+    
     private func setupCollection() {
         collection.delegate = self
         collection.dataSource = self
@@ -52,7 +58,7 @@ class TasksViewController: UIViewController {
     
     private func makeLayout() {
         self.view.addSubview(collection)
-        self.navigationItem.rightBarButtonItem = deleteButton
+//        self.navigationItem.rightBarButtonItem = deleteButton
     }
     
     private func makeConstraints() {
@@ -65,42 +71,40 @@ class TasksViewController: UIViewController {
         }
     }
     
-    @objc private func deleteTask() {
-        //процесс удаления...
-        
-        PopupViewController.show(style: .confirm(
-            title: "Вы уверены, что хотите удалить?",
-            subtitle: "После удаления задача не подлежит восстановлению, вы не сможете просмотреть ее снова."
-        )) {
-            print("Вызвано подтверждение")
-        }
-    }
+//    @objc private func deleteTask() {
+//        //процесс удаления...
+//        
+//        PopupViewController.show(style: .confirm(
+//            title: "Вы уверены, что хотите удалить?",
+//            subtitle: "После удаления задача не подлежит восстановлению, вы не сможете просмотреть ее снова."
+//        )) {
+//            print("Вызвано подтверждение")
+//        }
+//    }
 
 }
 
 extension TasksViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return lists.count
+        return notifications.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collection.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
-        cell.listNameLabel.text = lists[indexPath.item]
+        cell.set(element: notifications[indexPath.row])
         return cell
     }
 }
 
 extension TasksViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        let contact = data[indexPath.row]
-        //        if !contact.isChecked {
-        //            contact.isChecked.toggle()
-        //        } else {
-        //            print("Контакт уже был просмотрен")
-        //        }
-        //        sortData()
-        //    }
+//        let addVC = TasksViewController()
+//        addVC.notifications = [notifications[indexPath.row]]
+//        self.navigationController?.pushViewController(addVC, animated: true)
+        let taskDetailVC = TaskDetailViewController()
+        taskDetailVC.selectedNotification = notifications[indexPath.row]
+        self.navigationController?.pushViewController(taskDetailVC, animated: true)
     }
 }
     
@@ -111,3 +115,5 @@ extension TasksViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
     }
 }
+
+

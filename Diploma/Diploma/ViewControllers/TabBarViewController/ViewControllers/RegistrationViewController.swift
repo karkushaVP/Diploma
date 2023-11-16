@@ -67,7 +67,6 @@ class RegistrationViewController: UIViewController {
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.setTitle("Войти", for: .normal)
-//        button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 12
         button.backgroundColor = .systemTeal.withAlphaComponent(0.5)
         button.addTarget(self, action: #selector(login), for: .touchUpInside)
@@ -87,8 +86,9 @@ class RegistrationViewController: UIViewController {
         super.viewDidLoad()
         makeLayout()
         makeConstraints()
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-//        view.addGestureRecognizer(tap)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         
         if let userId = Auth.auth().currentUser?.uid {
             print("Залогинен пользователь: \(userId)")
@@ -133,7 +133,7 @@ class RegistrationViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-10)
             make.height.equalTo(40)
         }
-//
+        
         passwordInput.snp.makeConstraints { make in
             make.top.equalTo(loginInput.snp.bottom).offset(10)
             make.leading.equalTo(loginInput.snp.leading)

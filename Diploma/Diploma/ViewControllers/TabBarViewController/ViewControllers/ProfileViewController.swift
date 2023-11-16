@@ -73,7 +73,11 @@ class ProfileViewController: UIViewController {
         makeConstraints()
         setupControllerMode()
         setupGestures()
+        
         tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemTeal], for: .normal)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     init(mode: ControllerMode) {
@@ -161,7 +165,7 @@ class ProfileViewController: UIViewController {
             title = "Мой профиль"
             Environment.ref.child("users/\(id)/contacts/\(id)").observeSingleEvent(of: .value) { [weak self] (snapshot,arg)  in
                 guard let contactValue = snapshot.value as? [String: Any],
-                      let contactForRead = try? Contact(key: id, dict: contactValue)
+                      let contactForRead = try? Profile(key: id, dict: contactValue)
                 else { return }
                 self?.nameInput.text = contactForRead.name
                 self?.surnameInput.text = contactForRead.surname
@@ -223,7 +227,7 @@ class ProfileViewController: UIViewController {
               let image = avatarImageView.image?.jpegData(compressionQuality: 0.5)
         else { return }
         
-        let contact = Contact(
+        let contact = Profile(
             id: nil,
             name: name,
             surname: surname)
@@ -276,5 +280,17 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
                 }
             }
         }
+    }
+}
+
+extension ProfileViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
