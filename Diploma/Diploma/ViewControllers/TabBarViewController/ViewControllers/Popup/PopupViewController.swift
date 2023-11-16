@@ -137,14 +137,6 @@ class PopupViewController: UIViewController {
         switch style {
             case .confirm:
                 self.acceptButton.backgroundColor = .red.withAlphaComponent(0.8)
-                
-//            case .info:
-//                self.cancelButton.backgroundColor = .systemGreen
-//                self.cancelButton.tintColor = .white
-//
-//            case .custom(_, _, let acceptColor, let cancelColor, _):
-//                self.cancelButton.backgroundColor = cancelColor
-//                self.acceptButton.backgroundColor = acceptColor
         }
     }
     
@@ -155,16 +147,6 @@ class PopupViewController: UIViewController {
                 self.cancelButton.setTitle("Отмена", for: .normal)
                 self.titleLabel.text = title
                 self.subTitleLabel.text = subtitle
-
-//            case .info(title: let title, subtitle: let subtitle):
-//                self.cancelButton.setTitle("Закрыть", for: .normal)
-//                self.titleLabel.text = title
-//                self.subTitleLabel.text = subtitle
-//            case .custom(let title,  let subtitle, _, _, _):
-//                self.titleLabel.text = title
-//                self.subTitleLabel.text = subtitle
-//                self.acceptButton.setTitle("Подтвердить", for: .normal)
-//                self.cancelButton.setTitle("Отмена", for: .normal)
         }
     }
     
@@ -172,10 +154,6 @@ class PopupViewController: UIViewController {
         switch style {
             case .confirm:
                 break
-//            case .info:
-//                self.acceptButton.isHidden = true
-//            case .custom(_, _, _, _, let isAcceptAvalible):
-//                self.acceptButton.isHidden = !isAcceptAvalible
         }
     }
     
@@ -192,8 +170,6 @@ class PopupViewController: UIViewController {
 extension PopupViewController {
     enum Style {
         case confirm(title: String, subtitle: String? = nil)
-//        case info(title: String, subtitle: String? = nil)
-//        case custom(title: String, subtitle: String? = nil, acceptColor: UIColor = .systemGreen, cancelColor: UIColor = .white, isAcceptAvalible: Bool = true)
     }
 }
 

@@ -47,7 +47,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     func set(element: Element) {
         taskNameLabel.text = element.notificationName
-//        infoLabel.text = element.notificationText
     }
     
     func setupCell() {

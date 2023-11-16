@@ -16,7 +16,6 @@
 		EE34BE5D2B068CEB0031D5E8 /* ElementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5C2B068CEB0031D5E8 /* ElementModel.swift */; };
 		EE34BE5F2B0696920031D5E8 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */; };
 		EE4609E72AF8028C001CB687 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609E62AF8028C001CB687 /* Environment.swift */; };
-		EE4609EA2AF804A3001CB687 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609E92AF804A3001CB687 /* Task.swift */; };
 		EE4609ED2AF80FC4001CB687 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609EC2AF80FC4001CB687 /* Profile.swift */; };
 		EE4609F02AF81BAC001CB687 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609EF2AF81BAC001CB687 /* FirebaseAuth */; };
 		EE4609F22AF81BAC001CB687 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609F12AF81BAC001CB687 /* FirebaseDatabase */; };
@@ -44,7 +43,6 @@
 		EE34BE5C2B068CEB0031D5E8 /* ElementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementModel.swift; sourceTree = "<group>"; };
 		EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		EE4609E62AF8028C001CB687 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		EE4609E92AF804A3001CB687 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		EE4609EC2AF80FC4001CB687 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		EE67B8382AF30046008C95FC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EE67B83A2AF30059008C95FC /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 		EE4609E82AF80472001CB687 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EE4609E92AF804A3001CB687 /* Task.swift */,
 				EE4609EC2AF80FC4001CB687 /* Profile.swift */,
 				EE34BE5C2B068CEB0031D5E8 /* ElementModel.swift */,
 			);
@@ -277,7 +274,6 @@
 				EE67B83F2AF300AF008C95FC /* AddViewController.swift in Sources */,
 				EE1F07832AC1D8900038BE8C /* RealmManager.swift in Sources */,
 				EE09A0062B00FED00096EEB7 /* PopupViewController.swift in Sources */,
-				EE4609EA2AF804A3001CB687 /* Task.swift in Sources */,
 				EE34BE5B2B068A3D0031D5E8 /* PushManager.swift in Sources */,
 				EE67B8462AF30A1C008C95FC /* TabBarViewController.swift in Sources */,
 				EEF329602AE718AF00053CCA /* RegistrationViewController.swift in Sources */,

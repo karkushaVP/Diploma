@@ -22,17 +22,6 @@ class TasksViewController: UIViewController {
         return collection
     }()
     
-//    private lazy var deleteButton: UIBarButtonItem = {
-//        let button = UIButton(type: .custom)
-//        button.setImage(UIImage(systemName: "trash"), for: .normal)
-//        button.addTarget(self, action: #selector(deleteTask), for: .touchUpInside)
-//        
-//        let barButton = UIBarButtonItem(customView: button)
-//        navigationItem.rightBarButtonItem = barButton
-//        
-//        return barButton
-//    }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -58,7 +47,6 @@ class TasksViewController: UIViewController {
     
     private func makeLayout() {
         self.view.addSubview(collection)
-//        self.navigationItem.rightBarButtonItem = deleteButton
     }
     
     private func makeConstraints() {
@@ -70,18 +58,6 @@ class TasksViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
         }
     }
-    
-//    @objc private func deleteTask() {
-//        //процесс удаления...
-//        
-//        PopupViewController.show(style: .confirm(
-//            title: "Вы уверены, что хотите удалить?",
-//            subtitle: "После удаления задача не подлежит восстановлению, вы не сможете просмотреть ее снова."
-//        )) {
-//            print("Вызвано подтверждение")
-//        }
-//    }
-
 }
 
 extension TasksViewController: UICollectionViewDataSource {
@@ -99,9 +75,6 @@ extension TasksViewController: UICollectionViewDataSource {
 
 extension TasksViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let addVC = TasksViewController()
-//        addVC.notifications = [notifications[indexPath.row]]
-//        self.navigationController?.pushViewController(addVC, animated: true)
         let taskDetailVC = TaskDetailViewController()
         taskDetailVC.selectedNotification = notifications[indexPath.row]
         self.navigationController?.pushViewController(taskDetailVC, animated: true)

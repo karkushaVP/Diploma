@@ -273,8 +273,6 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async { [weak self] in
                     self?.avatarImageView.image = image
                 }
-                
-//                ниже код получения абсолютного пути для нашего файл (то есть пути где он физически на нашем девайсе)
                 result.itemProvider.loadFileRepresentation(forTypeIdentifier: "public.image") { [weak self] url, _ in
                     print(url)
                 }

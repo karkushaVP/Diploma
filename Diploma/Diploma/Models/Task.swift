@@ -42,8 +42,3 @@ struct Task {
             self.task = task
     }
 }
-//extension String: Error {}
-//
-//protocol Editabl {
-//    var id: String? { get }
-//}

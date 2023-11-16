@@ -82,7 +82,7 @@ class AddViewController: UIViewController, UITextViewDelegate {
             taskInput.text = "Что нужно сделать?"
             taskInput.textColor = .lightGray
         } else {
-            taskInput.textColor = .label // Or any color for user input
+            taskInput.textColor = .label
         }
     }
     

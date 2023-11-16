@@ -74,5 +74,4 @@ struct LocalPush {
         self.date = date
         self.repeats = repeats
     }
-    
 }
