@@ -13,13 +13,26 @@ class TaskDetailViewController: UIViewController {
     
     var selectedNotification: Element?
     
+    private let titleView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 12
+        view.layer.borderColor = UIColor.systemTeal.cgColor
+        view.layer.borderWidth = 2
+        return view
+    }()
+    
+    private let descriptionView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 12
+        view.layer.borderColor = UIColor.systemTeal.cgColor
+        view.layer.borderWidth = 2
+        return view
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         label.textColor = .black
-        label.layer.cornerRadius = 12
-        label.layer.borderColor = UIColor.systemTeal.cgColor
-        label.layer.borderWidth = 2
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -30,9 +43,6 @@ class TaskDetailViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .black
         label.numberOfLines = 100
-        label.layer.cornerRadius = 12
-        label.layer.borderColor = UIColor.systemTeal.cgColor
-        label.layer.borderWidth = 2
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -62,24 +72,40 @@ class TaskDetailViewController: UIViewController {
     
     private func makeLayout() {
         
-        self.view.addSubview(titleLabel)
-        self.view.addSubview(descriptionLabel)
+        self.view.addSubview(titleView)
+        titleView.addSubview(titleLabel)
+        self.view.addSubview(descriptionView)
+        descriptionView.addSubview(descriptionLabel)
     }
     
     private func makeConstraints() {
         
-        titleLabel.snp.makeConstraints { make in
+        titleView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.height.equalTo(40)
         }
         
-        descriptionLabel.snp.makeConstraints { make in
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(5)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.bottom.equalToSuperview().offset(-5)
+        }
+        
+        descriptionView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.top.equalTo(titleView.snp.bottom).offset(10)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
+        }
+        
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(5)
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview().offset(-5)
         }
     }
     

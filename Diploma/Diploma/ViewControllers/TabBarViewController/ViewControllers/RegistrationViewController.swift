@@ -59,6 +59,8 @@ class RegistrationViewController: UIViewController {
         let label = UILabel()
         label.textColor = .red
         label.numberOfLines = 3
+        label.backgroundColor = .white.withAlphaComponent(0.7)
+        label.textAlignment = .center
         label.font = .systemFont(ofSize: 13)
         label.isHidden = true
         return label
@@ -144,8 +146,8 @@ class RegistrationViewController: UIViewController {
         
         errorLabel.snp.makeConstraints { make in
             make.top.equalTo(loginView.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(25)
-            make.trailing.equalToSuperview().offset(-25)
+            make.leading.equalToSuperview().offset(26)
+            make.trailing.equalToSuperview().offset(-26)
         }
         
         registrationButton.snp.makeConstraints { make in
@@ -190,7 +192,7 @@ class RegistrationViewController: UIViewController {
             else {
                 print(error!.localizedDescription)
                 self?.errorLabel.isHidden = false
-                self?.errorLabel.text = "Проверьте написание логина и пароля:\n1) используйте существующую почту\n2) пароль должен состоять минимум 6 знаков"
+                self?.errorLabel.text = "Проверьте написание логина и пароля:\n1) используйте существующую почту\n2)пароль должен состоять минимум из 6 знаков"
                 self?.startErrorLabelTimer()
                 return
             }
