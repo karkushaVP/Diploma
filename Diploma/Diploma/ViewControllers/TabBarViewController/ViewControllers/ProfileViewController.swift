@@ -163,8 +163,12 @@ class ProfileViewController: UIViewController {
             
         case .read(let id):
             title = "Мой профиль"
-            Environment.ref.child("users/\(id)/contacts/\(id)").observeSingleEvent(of: .value) { [weak self] (snapshot,arg)  in
-                guard let contactValue = snapshot.value as? [String: Any],
+//            Environment.ref.child("users/\(user.uid)/contacts").childByAutoId().setValue(contact.asDict)
+//            saveAvatar(imageData: image)
+//            dismiss(animated: true)
+            Environment.ref.child("users/\(id)/contacts").observeSingleEvent(of: .value) { [weak self] (snapshot,arg)  in
+                guard let value = snapshot.value as? [String: Any],
+                      let contactValue = value.first?.value as? [String: Any],
                       let contactForRead = try? Profile(key: id, dict: contactValue)
                 else { return }
                 self?.nameInput.text = contactForRead.name
@@ -216,7 +220,7 @@ class ProfileViewController: UIViewController {
                 UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
                 print("Вызвано подтверждение")
             }
-            
+            //удаляется юзер и удаляются все данные с реалма с этого профиля в колеккции
         }
     }
     

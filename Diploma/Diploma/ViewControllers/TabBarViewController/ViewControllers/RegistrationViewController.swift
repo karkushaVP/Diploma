@@ -207,27 +207,19 @@ class RegistrationViewController: UIViewController {
         }
         
         // Shake animation on error label
-        let shakeAnimation = CAKeyframeAnimation(keyPath: "position")
+        let shakeAnimation = CAKeyframeAnimation(keyPath: "position.x")
         shakeAnimation.values = [
-            NSValue(cgPoint: CGPoint(x: self.errorLabel.center.x , y: self.errorLabel.center.y )),
-            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) - 10, y: self.errorLabel.center.y )),
-            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) + 10, y: self.errorLabel.center.y )),
-            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) - 10, y: self.errorLabel.center.y )),
-            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) + 10, y: self.errorLabel.center.y )),
-            NSValue(cgPoint: CGPoint(x: (self.errorLabel.center.x ) - 10, y: self.errorLabel.center.y )),
-            NSValue(cgPoint: CGPoint(x: self.errorLabel.center.x , y: self.errorLabel.center.y ))
+            self.errorLabel.center.x,
+            (self.errorLabel.center.x) - 10,
+            (self.errorLabel.center.x) + 10,
+            (self.errorLabel.center.x) - 10,
+            (self.errorLabel.center.x) + 10,
+            (self.errorLabel.center.x) - 10,
+            self.errorLabel.center.x
         ]
-        shakeAnimation.timingFunctions = [
-            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
-            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
-            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
-            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
-            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
-            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut),
-            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        ]
+        shakeAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         shakeAnimation.duration = 0.7
-        self.errorLabel.layer.add(shakeAnimation, forKey: "position")
+        self.errorLabel.layer.add(shakeAnimation, forKey: nil)
     }
 
     private func hideErrorLabel() {

@@ -42,6 +42,8 @@ class CollectionViewCell: UICollectionViewCell {
         
         taskNameLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
+            make.leading.equalToSuperview().offset(5)
+            make.trailing.equalToSuperview().offset(-5)
         }
     }
     

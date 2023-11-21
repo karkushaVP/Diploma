@@ -19,26 +19,41 @@ class AddViewController: UIViewController, UITextViewDelegate {
         input.layer.borderColor = UIColor.systemTeal.cgColor
         input.layer.borderWidth = 2
         input.leftViewMode = .always
-        input.leftView = UIView(frame: .init(x: 0, y: 0, width: 10, height: 0))
+        input.leftView = UIView(frame: .init(x: 0, y: 0, width: 16, height: 0))
         input.placeholder = "Заголовок задачи"
         return input
     }()
     
+    private let viewInput: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 12
+        view.layer.borderColor = UIColor.systemTeal.cgColor
+        view.layer.borderWidth = 2
+        return view
+    }()
+    
+    lazy var questionLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "Что нужно сделать?"
+        label.textColor = .lightGray
+        label.font = UIFont.italicSystemFont(ofSize: 16.0)
+        label.isHidden = false
+        return label
+    }()
+    
     private let taskInput: UITextView = {
-            let textView = UITextView()
-            textView.translatesAutoresizingMaskIntoConstraints = false
-            textView.text = "Что нужно сделать?"
-            textView.textColor = .lightGray // Placeholder color
-            textView.font = UIFont.systemFont(ofSize: 16)
-            textView.layer.borderWidth = 2
-            textView.layer.cornerRadius = 12
-            textView.layer.borderColor = UIColor.systemTeal.cgColor
-            textView.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
-            return textView
-        }()
+        let textView = UITextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.font = UIFont.systemFont(ofSize: 16)
+        textView.layer.borderColor = UIColor.systemTeal.cgColor
+        textView.textContainerInset = UIEdgeInsets(top: 8, left: 5, bottom: 8, right: 5)
+        textView.backgroundColor = .clear
+        return textView
+    }()
     
     private lazy var datePicker: UIDatePicker = {
-       let picker = UIDatePicker()
+        let picker = UIDatePicker()
         return picker
     }()
     
@@ -48,11 +63,11 @@ class AddViewController: UIViewController, UITextViewDelegate {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 12
         button.backgroundColor = .systemTeal.withAlphaComponent(0.5)
-                button.addTarget(
-                    self,
-                    action: #selector(saveTaskAction),
-                    for: .touchUpInside
-                )
+        button.addTarget(
+            self,
+            action: #selector(saveTaskAction),
+            for: .touchUpInside
+        )
         return button
     }()
     
@@ -71,18 +86,19 @@ class AddViewController: UIViewController, UITextViewDelegate {
     
     private func setupLayout() {
         self.view.addSubview(nameTaskInput)
-        self.view.addSubview(taskInput)
+        self.view.addSubview(viewInput)
+        viewInput.addSubview(questionLabel)
+        viewInput.addSubview(taskInput)
         self.view.addSubview(datePicker)
         self.view.addSubview(saveButton)
         taskInput.delegate = self
     }
     
-    @objc func textViewDidChange(_ taskInput: UITextView) {
-        if taskInput.text.isEmpty {
-            taskInput.text = "Что нужно сделать?"
-            taskInput.textColor = .lightGray
+    func textViewDidChange(_ taskInput: UITextView) {
+        if taskInput.hasText == true {
+            questionLabel.isHidden = true
         } else {
-            taskInput.textColor = .label
+            questionLabel.isHidden = false
         }
     }
     
@@ -93,10 +109,22 @@ class AddViewController: UIViewController, UITextViewDelegate {
             make.height.equalTo(40)
         }
         
-        taskInput.snp.makeConstraints { make in
+        viewInput.snp.makeConstraints { make in
             make.top.equalTo(nameTaskInput.snp.bottom).inset(-20)
             make.leading.trailing.equalToSuperview().inset(16)
             make.bottom.equalTo(datePicker.snp.top).offset(-20)
+        }
+        
+        questionLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(10)
+        }
+        
+        taskInput.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(10)
+            make.top.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview().inset(10)
         }
         
         datePicker.snp.makeConstraints { make in
@@ -132,7 +160,7 @@ class AddViewController: UIViewController, UITextViewDelegate {
             repeats: false
         )
         
-        PushManager().createPushFrom(push: localPush)
+        PushManager.shared.createPushFrom(push: localPush)
         let notification = Element()
         notification.notificationName = title
         notification.notificationText = subTitle

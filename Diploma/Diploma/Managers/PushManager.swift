@@ -8,11 +8,14 @@
 import Foundation
 import UserNotifications
 
-final class PushManager {
+final class PushManager: NSObject {
     private let center = UNUserNotificationCenter.current()
     var isPushesEnabled = false
+    
+    static let shared: PushManager = PushManager()
 
     private func requestAutorization() {
+        center.delegate = self
         center.requestAuthorization(options: [.badge, .alert, .sound]) { [weak self] granted, error in
             if granted {
                 self?.isPushesEnabled = true
@@ -49,7 +52,7 @@ final class PushManager {
         
         
         let request = UNNotificationRequest(identifier: push.id, content: content, trigger: trigger)
-
+        
         center.add(request)
     }
 }
@@ -74,4 +77,16 @@ struct LocalPush {
         self.date = date
         self.repeats = repeats
     }
+}
+
+extension PushManager: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.badge, .banner, .sound])
+    }
+    
 }

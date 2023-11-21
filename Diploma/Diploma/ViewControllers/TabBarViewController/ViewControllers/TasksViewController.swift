@@ -13,6 +13,17 @@ class TasksViewController: UIViewController {
 
     var notifications: [Element] = []
     
+    private lazy var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.text = "На данный момент список задач пуст"
+        label.textColor = .systemGray3
+        label.numberOfLines = 2
+        label.font = UIFont.italicSystemFont(ofSize: 25.0)
+        label.isHidden = false
+        return label
+    }()
+    
     private lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 15
@@ -34,7 +45,14 @@ class TasksViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        notifications = RealmManager<Element>().read()
+        notifications = RealmManager<Element>().read().reversed()
+        
+        if notifications.count == 0 {
+            emptyLabel.isHidden = false
+        } else {
+            emptyLabel.isHidden = true
+        }
+        
         collection.reloadData()
     }
     
@@ -46,7 +64,9 @@ class TasksViewController: UIViewController {
     }
     
     private func makeLayout() {
+    
         self.view.addSubview(collection)
+        self.view.addSubview(emptyLabel)
     }
     
     private func makeConstraints() {
@@ -56,6 +76,12 @@ class TasksViewController: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(15)
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-15)
+        }
+        
+        emptyLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
 }
@@ -83,9 +109,10 @@ extension TasksViewController: UICollectionViewDelegate {
     
 extension TasksViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat =  50
+        let padding: CGFloat =  10
         let collectionViewSize = collectionView.frame.size.width - padding
-        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
+        let cellWidth = collectionViewSize / 2 - 4
+        return CGSize(width: cellWidth, height: cellWidth)
     }
 }
 

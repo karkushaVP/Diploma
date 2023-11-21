@@ -118,7 +118,7 @@ class TaskDetailViewController: UIViewController {
             if let selectedNotification = self.selectedNotification {
                 RealmManager<Element>().delete(object: selectedNotification)
             }
-            UIApplication.shared.keyWindow?.rootViewController = TasksViewController()
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

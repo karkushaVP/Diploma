@@ -28,6 +28,8 @@ final class RealmManager<T: Object> {
     }
     
     func delete(object: T) {
-        realm?.delete(object)
+        try? realm?.write({
+            realm?.delete(object)
+        })
     }
 }
