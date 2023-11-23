@@ -34,7 +34,7 @@ class TabBarViewController: UITabBarController {
         
         let addVC = AddViewController()
         controllers.append(UINavigationController(rootViewController: addVC))
-        addVC.tabBarItem = .init(title: "Добавить", image: .init(systemName: "plus"), tag: 0)
+        addVC.tabBarItem = .init(title: "Создать задачу", image: .init(systemName: "plus"), tag: 0)
         
         let calendarVC = CalendarViewController()
         controllers.append(UINavigationController(rootViewController: calendarVC))
