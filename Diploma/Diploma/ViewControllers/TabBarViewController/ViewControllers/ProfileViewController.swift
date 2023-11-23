@@ -11,7 +11,7 @@ import PhotosUI
 
 enum ControllerMode {
     case create
-    case read(String)
+    case read(id: String)
 }
 
 class ProfileViewController: UIViewController {
@@ -19,12 +19,12 @@ class ProfileViewController: UIViewController {
     private let mode: ControllerMode
     
     private lazy var avatarImageView: UIImageView = {
-        let image = UIImageView()
+        let image = UIImageView(image: UIImage(named: "profile"))
         image.layer.cornerRadius = 20
-        image.layer.borderWidth = 2
+        image.layer.borderWidth = 4
         image.contentMode = .scaleAspectFill
         image.layer.borderColor = UIColor.systemTeal.cgColor
-        image.image = UIImage(systemName: "gear")
+        image.backgroundColor = UIColor.systemTeal.withAlphaComponent(0.5)
         image.isUserInteractionEnabled = true
         image.clipsToBounds = true
         return image
@@ -101,14 +101,14 @@ class ProfileViewController: UIViewController {
         avatarImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(view.safeAreaLayoutGuide).offset(25)
-            make.height.equalTo(160)
-            make.width.equalTo(160)
+            make.height.equalTo(220)
+            make.width.equalTo(220)
         }
         
         nameInput.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(avatarImageView.snp.bottom).offset(25)
+            make.top.equalTo(avatarImageView.snp.bottom).offset(30)
             make.height.equalTo(40)
         }
         
@@ -163,18 +163,15 @@ class ProfileViewController: UIViewController {
             
         case .read(let id):
             title = "Мой профиль"
-//            Environment.ref.child("users/\(user.uid)/contacts").childByAutoId().setValue(contact.asDict)
-//            saveAvatar(imageData: image)
-//            dismiss(animated: true)
             Environment.ref.child("users/\(id)/contacts").observeSingleEvent(of: .value) { [weak self] (snapshot,arg)  in
                 guard let value = snapshot.value as? [String: Any],
                       let contactValue = value.first?.value as? [String: Any],
-                      let contactForRead = try? Profile(key: id, dict: contactValue)
+                      let contactForRead = try? ProfileModel(key: id, dict: contactValue)
                 else { return }
                 self?.nameInput.text = contactForRead.name
                 self?.surnameInput.text = contactForRead.surname
             }
-            let child = Environment.storage.child("images/\(id).jpg")
+            let child = Environment.storage.child("avatars/\(id)/user_avatar.jpg")
             child.downloadURL { (url, error) in
                 DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                     guard let url,
@@ -186,6 +183,8 @@ class ProfileViewController: UIViewController {
                     }
                 }
             }
+            
+//            настроить SceneDelegate
             
             let addButton = UIButton(type: .system)
             addButton.addTarget(self, action: #selector(deleteContact), for: .touchUpInside)
@@ -201,13 +200,11 @@ class ProfileViewController: UIViewController {
         case .read(let id):
             guard let user = Auth.auth().currentUser
             else { return }
-            Environment.ref.child("users/\(user.uid)/contacts/\(id)").removeValue()
-            navigationController?.popViewController(animated: true)
             
             PopupViewController.show(style: .confirm(
                 title: "Вы уверены, что хотите удалить профиль и все его данные?",
                 subtitle: "После удаления профиль не подлежит восстановлению, вы не сможете использовать его снова."
-            )) {
+            )) { [self] in
                 if let user = Auth.auth().currentUser {
                     user.delete { error in
                         if let error = error {
@@ -217,10 +214,33 @@ class ProfileViewController: UIViewController {
                         }
                     }
                 }
+                
+                let databaseReference = Environment.ref.child("users/\(id)/contacts")
+                databaseReference.removeValue { error, _ in
+                    if let error = error {
+                        print("Error deleting data from Firebase Realtime Database: \(error.localizedDescription)")
+                    } else {
+                        print("Data deleted from Firebase Realtime Database successfully.")
+                    }
+                }
+                
+                let storageRef = Environment.storage.child("avatars/\(id)/user_avatar.jpg")
+
+                storageRef.delete { error in
+                    if let error = error {
+                        print("Ошибка при удалении изображения из Firebase Storage: \(error.localizedDescription)")
+                    } else {
+                        print("Изображение успешно удалено из Firebase Storage")
+                    }
+                }
+                
+                RealmManager<TaskEntityModel>().deleteAll(object: TaskEntityModel.self)
+                PushManager.shared.removeAllNotifications()
+                
                 UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
                 print("Вызвано подтверждение")
             }
-            //удаляется юзер и удаляются все данные с реалма с этого профиля в колеккции
+            //удаляется удаляются все данные с реалма?? с этого профиля в колеккции
         }
     }
     
@@ -231,7 +251,7 @@ class ProfileViewController: UIViewController {
               let image = avatarImageView.image?.jpegData(compressionQuality: 0.5)
         else { return }
         
-        let contact = Profile(
+        let contact = ProfileModel(
             id: nil,
             name: name,
             surname: surname)
@@ -244,7 +264,6 @@ class ProfileViewController: UIViewController {
         case .read(let id):
             Environment.ref.child("users/\(user.uid)/contacts/\(id)").observe(.value) { snapshot in
                 guard let contactData = snapshot.value as? [String: Any] else {
-                    // ??????????????
                     return
                 }
                 self.nameInput.text = contactData["name"] as? String
@@ -255,7 +274,7 @@ class ProfileViewController: UIViewController {
     
     @objc private func saveAvatar(imageData: Data) {
         guard let user = Auth.auth().currentUser else { return }
-        let child = Environment.storage.child("\(user.uid)/\(UUID().uuidString).jpg")
+        let child = Environment.storage.child("avatars/\(user.uid)/user_avatar.jpg")
         _ = child.putData(imageData, metadata: nil) { (metadata, error) in
             guard metadata != nil else {
                 print("Картинка не была загружена")

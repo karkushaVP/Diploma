@@ -7,11 +7,10 @@
 
 import UIKit
 import FirebaseAuth
-import Combine
 
 class AddViewController: UIViewController, UITextViewDelegate {
     
-    var notifications: [Element] = []
+    var notifications: [TaskEntityModel] = []
     
     private lazy var nameTaskInput: UITextField = {
         let input = UITextField()
@@ -161,7 +160,7 @@ class AddViewController: UIViewController, UITextViewDelegate {
         )
         
         PushManager.shared.createPushFrom(push: localPush)
-        let notification = Element()
+        let notification = TaskEntityModel()
         notification.notificationName = title
         notification.notificationText = subTitle
         notifications.append(notification)

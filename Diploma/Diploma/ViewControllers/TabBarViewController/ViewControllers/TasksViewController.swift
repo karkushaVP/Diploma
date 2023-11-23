@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import SnapKit
-import Combine
 
 class TasksViewController: UIViewController {
 
-    var notifications: [Element] = []
+    var notifications: [TaskEntityModel] = []
     
     private lazy var emptyLabel: UILabel = {
         let label = UILabel()
@@ -45,7 +43,7 @@ class TasksViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        notifications = RealmManager<Element>().read().reversed()
+        notifications = RealmManager<TaskEntityModel>().read().reversed()
         
         if notifications.count == 0 {
             emptyLabel.isHidden = false
@@ -61,6 +59,11 @@ class TasksViewController: UIViewController {
         collection.dataSource = self
         collection.register( CollectionViewCell.self, forCellWithReuseIdentifier: String(describing: CollectionViewCell.self)
         )
+    }
+    
+    func deleteCollectionData() {
+        notifications.removeAll()
+        collection.reloadData()
     }
     
     private func makeLayout() {
@@ -115,5 +118,3 @@ extension TasksViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: cellWidth, height: cellWidth)
     }
 }
-
-

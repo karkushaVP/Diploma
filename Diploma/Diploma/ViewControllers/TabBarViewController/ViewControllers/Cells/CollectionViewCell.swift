@@ -47,7 +47,7 @@ class CollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func set(element: Element) {
+    func set(element: TaskEntityModel) {
         taskNameLabel.text = element.notificationName
     }
     

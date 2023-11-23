@@ -192,7 +192,7 @@ class RegistrationViewController: UIViewController {
             else {
                 print(error!.localizedDescription)
                 self?.errorLabel.isHidden = false
-                self?.errorLabel.text = "Проверьте написание логина и пароля:\n1) используйте существующую почту\n2)пароль должен состоять минимум из 6 знаков"
+                self?.errorLabel.text = "Проверьте написание логина и пароля:\n1) используйте существующую почту\n2) пароль должен состоять минимум из 6 знаков"
                 self?.startErrorLabelTimer()
                 return
             }

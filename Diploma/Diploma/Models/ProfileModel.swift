@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Profile {
+struct ProfileModel {
     var id: String?
     let name: String
     let surname: String

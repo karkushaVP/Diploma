@@ -55,6 +55,11 @@ final class PushManager: NSObject {
         
         center.add(request)
     }
+    
+    func removeAllNotifications() {
+        center.removeAllDeliveredNotifications()
+        center.removeAllPendingNotificationRequests()
+    }
 }
 
 struct LocalPush {

@@ -13,10 +13,10 @@
 		EE1F07892AC1D9AB0038BE8C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F07882AC1D9AB0038BE8C /* Realm */; };
 		EE1F078B2AC1D9AB0038BE8C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EE1F078A2AC1D9AB0038BE8C /* RealmSwift */; };
 		EE34BE5B2B068A3D0031D5E8 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5A2B068A3D0031D5E8 /* PushManager.swift */; };
-		EE34BE5D2B068CEB0031D5E8 /* ElementModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5C2B068CEB0031D5E8 /* ElementModel.swift */; };
+		EE34BE5D2B068CEB0031D5E8 /* TaskEntityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5C2B068CEB0031D5E8 /* TaskEntityModel.swift */; };
 		EE34BE5F2B0696920031D5E8 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */; };
 		EE4609E72AF8028C001CB687 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609E62AF8028C001CB687 /* Environment.swift */; };
-		EE4609ED2AF80FC4001CB687 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609EC2AF80FC4001CB687 /* Profile.swift */; };
+		EE4609ED2AF80FC4001CB687 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609EC2AF80FC4001CB687 /* ProfileModel.swift */; };
 		EE4609F02AF81BAC001CB687 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609EF2AF81BAC001CB687 /* FirebaseAuth */; };
 		EE4609F22AF81BAC001CB687 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609F12AF81BAC001CB687 /* FirebaseDatabase */; };
 		EE4609F42AF81BAC001CB687 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609F32AF81BAC001CB687 /* FirebaseStorage */; };
@@ -40,10 +40,10 @@
 		EE09A0052B00FED00096EEB7 /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		EE1F07822AC1D8900038BE8C /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		EE34BE5A2B068A3D0031D5E8 /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
-		EE34BE5C2B068CEB0031D5E8 /* ElementModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementModel.swift; sourceTree = "<group>"; };
+		EE34BE5C2B068CEB0031D5E8 /* TaskEntityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEntityModel.swift; sourceTree = "<group>"; };
 		EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		EE4609E62AF8028C001CB687 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
-		EE4609EC2AF80FC4001CB687 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		EE4609EC2AF80FC4001CB687 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		EE67B8382AF30046008C95FC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EE67B83A2AF30059008C95FC /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		EE67B83C2AF30073008C95FC /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
@@ -107,8 +107,8 @@
 		EE4609E82AF80472001CB687 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EE4609EC2AF80FC4001CB687 /* Profile.swift */,
-				EE34BE5C2B068CEB0031D5E8 /* ElementModel.swift */,
+				EE4609EC2AF80FC4001CB687 /* ProfileModel.swift */,
+				EE34BE5C2B068CEB0031D5E8 /* TaskEntityModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -267,8 +267,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EE34BE5F2B0696920031D5E8 /* TaskDetailViewController.swift in Sources */,
-				EE34BE5D2B068CEB0031D5E8 /* ElementModel.swift in Sources */,
-				EE4609ED2AF80FC4001CB687 /* Profile.swift in Sources */,
+				EE34BE5D2B068CEB0031D5E8 /* TaskEntityModel.swift in Sources */,
+				EE4609ED2AF80FC4001CB687 /* ProfileModel.swift in Sources */,
 				EE67B83D2AF30073008C95FC /* TasksViewController.swift in Sources */,
 				EE67B83B2AF30059008C95FC /* CalendarViewController.swift in Sources */,
 				EE67B83F2AF300AF008C95FC /* AddViewController.swift in Sources */,

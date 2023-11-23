@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import SnapKit
-import Combine
 
 class TaskDetailViewController: UIViewController {
     
-    var selectedNotification: Element?
+    var selectedNotification: TaskEntityModel?
     
     private let titleView: UIView = {
         let view = UIView()
@@ -42,7 +40,7 @@ class TaskDetailViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = .black
-        label.numberOfLines = 100
+        label.numberOfLines = 50
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -116,13 +114,13 @@ class TaskDetailViewController: UIViewController {
         )) {
             print("Вызвано подтверждение")
             if let selectedNotification = self.selectedNotification {
-                RealmManager<Element>().delete(object: selectedNotification)
+                RealmManager<TaskEntityModel>().delete(object: selectedNotification)
             }
             self.navigationController?.popViewController(animated: true)
         }
     }
     
-    func set(element: Element) {
+    func set(element: TaskEntityModel) {
         titleLabel.text = element.notificationName
         descriptionLabel.text = element.notificationText
     }

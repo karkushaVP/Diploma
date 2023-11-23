@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class Element: Object {
+class TaskEntityModel: Object {
     @Persisted var notificationName: String
     @Persisted var notificationText: String
     

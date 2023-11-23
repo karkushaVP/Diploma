@@ -32,4 +32,13 @@ final class RealmManager<T: Object> {
             realm?.delete(object)
         })
     }
+    
+    func deleteAll(object: T.Type) {
+        try? realm?.write {
+            if let allData = realm?.objects(T.self) {
+                realm?.delete(allData)
+            }
+        }
+    }
+    
 }

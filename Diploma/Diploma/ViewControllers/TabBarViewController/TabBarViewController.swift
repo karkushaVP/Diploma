@@ -28,7 +28,7 @@ class TabBarViewController: UITabBarController {
     func setupControllers() {
         var controllers: [UIViewController] = []
         
-        let profileVC = ProfileViewController(mode: .read(currentUserId))
+        let profileVC = ProfileViewController(mode: .read(id: currentUserId))
         controllers.append(UINavigationController(rootViewController: profileVC))
         profileVC.tabBarItem = .init(title: "Профиль", image: .init(systemName: "person"), tag: 0)
         
