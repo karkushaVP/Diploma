@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import PhotosUI
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
     private let mode: ControllerMode
     

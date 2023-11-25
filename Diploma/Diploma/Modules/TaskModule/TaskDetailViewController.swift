@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TaskDetailViewController: UIViewController {
+final class TaskDetailViewController: UIViewController {
     
     var selectedNotification: TaskEntityModel?
     

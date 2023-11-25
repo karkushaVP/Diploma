@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Combine
 
-class CollectionViewCell: UICollectionViewCell {
+final class CollectionViewCell: UICollectionViewCell {
     
     static let id = String(describing: CollectionViewCell.self)
     

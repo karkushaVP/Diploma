@@ -10,7 +10,7 @@ import SnapKit
 
 typealias VoidBlock = () -> Void
 
-class PopupViewController: UIViewController {
+final class PopupViewController: UIViewController {
     
     private lazy var mainView: UIView = {
         let view = UIView()

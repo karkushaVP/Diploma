@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TasksViewController: UIViewController {
+final class TasksViewController: UIViewController {
 
     var notifications: [TaskEntityModel] = []
     

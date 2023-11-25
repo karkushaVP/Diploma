@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import FirebaseAuth
 
-class RegistrationViewController: UIViewController {
+final class RegistrationViewController: UIViewController {
     
     private lazy var coverImage: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "registr"))

@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-class TaskEntityModel: Object {
+final class TaskEntityModel: Object {
     @Persisted var notificationName: String
     @Persisted var notificationText: String
     @Persisted var date: Date

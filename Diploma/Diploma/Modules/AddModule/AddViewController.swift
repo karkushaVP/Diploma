@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class AddViewController: UIViewController, UITextViewDelegate {
+final class AddViewController: UIViewController, UITextViewDelegate {
     
     var notifications: [TaskEntityModel] = []
     
