@@ -8,7 +8,6 @@
 import UIKit
 import FSCalendar
  
-// отобризить точки на календаре по показу таски
 class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
     private let calendar = FSCalendar()
@@ -37,7 +36,6 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         calendar.appearance.todayColor = .systemTeal
         calendar.appearance.selectionColor = UIColor.systemTeal.withAlphaComponent(0.5)
         calendar.firstWeekday = 2
-//        calendar.appearance.eventColor = UIColor.greenColor
     }
 
     private func makeLayout() {
@@ -54,6 +52,7 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
     }
     
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        
         let tasks = RealmManager<TaskEntityModel>().read()
         
         let filteredTasks = tasks.filter { task in
@@ -94,20 +93,5 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
             self.present(taskDetailVC, animated:true, completion: nil)
         }
     }
+    
 }
-
-/*
- Task1 23.11
- Task2 23.11
- Task3 18.11
- Task4 30.11
- 
- [Task1, Task2, Task3, Task4].filter { task in
-    task.date == date
- ]
- 
- [0, 1, 2, 3]
- 
- count = 4 итерации
- isEmpty = 1 итерация
- */

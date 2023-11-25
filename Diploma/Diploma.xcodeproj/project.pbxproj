@@ -15,6 +15,7 @@
 		EE34BE5B2B068A3D0031D5E8 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5A2B068A3D0031D5E8 /* PushManager.swift */; };
 		EE34BE5D2B068CEB0031D5E8 /* TaskEntityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5C2B068CEB0031D5E8 /* TaskEntityModel.swift */; };
 		EE34BE5F2B0696920031D5E8 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */; };
+		EE37F36E2B12B62000D95C9E /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE37F36D2B12B62000D95C9E /* Enum.swift */; };
 		EE4609E72AF8028C001CB687 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609E62AF8028C001CB687 /* Environment.swift */; };
 		EE4609ED2AF80FC4001CB687 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4609EC2AF80FC4001CB687 /* ProfileModel.swift */; };
 		EE4609F02AF81BAC001CB687 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EE4609EF2AF81BAC001CB687 /* FirebaseAuth */; };
@@ -42,6 +43,7 @@
 		EE34BE5A2B068A3D0031D5E8 /* PushManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
 		EE34BE5C2B068CEB0031D5E8 /* TaskEntityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEntityModel.swift; sourceTree = "<group>"; };
 		EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
+		EE37F36D2B12B62000D95C9E /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		EE4609E62AF8028C001CB687 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		EE4609EC2AF80FC4001CB687 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		EE67B8382AF30046008C95FC /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -79,61 +81,113 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EE09A0042B00FEAB0096EEB7 /* Popup */ = {
+		EE09A0042B00FEAB0096EEB7 /* PopupModule */ = {
 			isa = PBXGroup;
 			children = (
 				EE09A0052B00FED00096EEB7 /* PopupViewController.swift */,
 			);
-			path = Popup;
-			sourceTree = "<group>";
-		};
-		EE1F077B2ABC94B40038BE8C /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				EE67B8432AF309E5008C95FC /* TabBarViewController */,
-			);
-			path = ViewControllers;
+			path = PopupModule;
 			sourceTree = "<group>";
 		};
 		EE1F07812AC1D8580038BE8C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				EE4609E62AF8028C001CB687 /* Environment.swift */,
 				EE1F07822AC1D8900038BE8C /* RealmManager.swift */,
 				EE34BE5A2B068A3D0031D5E8 /* PushManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		EE37F36F2B12B89300D95C9E /* ProfileModule */ = {
+			isa = PBXGroup;
+			children = (
+				EE37F36D2B12B62000D95C9E /* Enum.swift */,
+				EE67B8382AF30046008C95FC /* ProfileViewController.swift */,
+				EE4609EC2AF80FC4001CB687 /* ProfileModel.swift */,
+			);
+			path = ProfileModule;
+			sourceTree = "<group>";
+		};
+		EE37F3702B12B8D400D95C9E /* RegistrationModule */ = {
+			isa = PBXGroup;
+			children = (
+				EEF3295F2AE718AF00053CCA /* RegistrationViewController.swift */,
+			);
+			path = RegistrationModule;
+			sourceTree = "<group>";
+		};
+		EE37F3712B12B90F00D95C9E /* CalendarModule */ = {
+			isa = PBXGroup;
+			children = (
+				EE67B83A2AF30059008C95FC /* CalendarViewController.swift */,
+			);
+			path = CalendarModule;
+			sourceTree = "<group>";
+		};
+		EE37F3722B12B93F00D95C9E /* AddModule */ = {
+			isa = PBXGroup;
+			children = (
+				EE67B83E2AF300AF008C95FC /* AddViewController.swift */,
+			);
+			path = AddModule;
+			sourceTree = "<group>";
+		};
+		EE37F3732B12B95900D95C9E /* TasksModule */ = {
+			isa = PBXGroup;
+			children = (
+				EE67B83C2AF30073008C95FC /* TasksViewController.swift */,
+				EE6AB8772AFFC113007B7226 /* Cells */,
+			);
+			path = TasksModule;
+			sourceTree = "<group>";
+		};
+		EE37F3742B12B9B400D95C9E /* TaskModule */ = {
+			isa = PBXGroup;
+			children = (
+				EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */,
+			);
+			path = TaskModule;
+			sourceTree = "<group>";
+		};
+		EE37F3752B12B9F000D95C9E /* TabBarModule */ = {
+			isa = PBXGroup;
+			children = (
+				EE67B8452AF30A1C008C95FC /* TabBarViewController.swift */,
+			);
+			path = TabBarModule;
+			sourceTree = "<group>";
+		};
+		EE37F3762B12BAC500D95C9E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				EEA9A1F72AB1C95E00B45518 /* SceneDelegate.swift */,
+				EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
 		EE4609E82AF80472001CB687 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				EE4609EC2AF80FC4001CB687 /* ProfileModel.swift */,
 				EE34BE5C2B068CEB0031D5E8 /* TaskEntityModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		EE67B8432AF309E5008C95FC /* TabBarViewController */ = {
+		EE67B8442AF309FC008C95FC /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				EE67B8452AF30A1C008C95FC /* TabBarViewController.swift */,
-				EE67B8442AF309FC008C95FC /* ViewControllers */,
+				EE37F3752B12B9F000D95C9E /* TabBarModule */,
+				EE09A0042B00FEAB0096EEB7 /* PopupModule */,
+				EE37F3702B12B8D400D95C9E /* RegistrationModule */,
+				EE37F36F2B12B89300D95C9E /* ProfileModule */,
+				EE37F3722B12B93F00D95C9E /* AddModule */,
+				EE37F3712B12B90F00D95C9E /* CalendarModule */,
+				EE37F3732B12B95900D95C9E /* TasksModule */,
+				EE37F3742B12B9B400D95C9E /* TaskModule */,
 			);
-			path = TabBarViewController;
-			sourceTree = "<group>";
-		};
-		EE67B8442AF309FC008C95FC /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				EEF3295F2AE718AF00053CCA /* RegistrationViewController.swift */,
-				EE67B8382AF30046008C95FC /* ProfileViewController.swift */,
-				EE67B83E2AF300AF008C95FC /* AddViewController.swift */,
-				EE67B83A2AF30059008C95FC /* CalendarViewController.swift */,
-				EE67B83C2AF30073008C95FC /* TasksViewController.swift */,
-				EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */,
-				EE6AB8772AFFC113007B7226 /* Cells */,
-			);
-			path = ViewControllers;
+			path = Modules;
 			sourceTree = "<group>";
 		};
 		EE6AB8772AFFC113007B7226 /* Cells */ = {
@@ -163,13 +217,10 @@
 		EEA9A1F42AB1C95E00B45518 /* Diploma */ = {
 			isa = PBXGroup;
 			children = (
-				EE09A0042B00FEAB0096EEB7 /* Popup */,
-				EE4609E82AF80472001CB687 /* Models */,
+				EE37F3762B12BAC500D95C9E /* Application */,
 				EE1F07812AC1D8580038BE8C /* Managers */,
-				EE1F077B2ABC94B40038BE8C /* ViewControllers */,
-				EEA9A1F52AB1C95E00B45518 /* AppDelegate.swift */,
-				EEA9A1F72AB1C95E00B45518 /* SceneDelegate.swift */,
-				EE4609E62AF8028C001CB687 /* Environment.swift */,
+				EE4609E82AF80472001CB687 /* Models */,
+				EE67B8442AF309FC008C95FC /* Modules */,
 				EEA9A1FB2AB1C95E00B45518 /* Main.storyboard */,
 				EEA9A1FE2AB1C95F00B45518 /* Assets.xcassets */,
 				EEA9A2002AB1C95F00B45518 /* LaunchScreen.storyboard */,
@@ -279,6 +330,7 @@
 				EEF329602AE718AF00053CCA /* RegistrationViewController.swift in Sources */,
 				EE6AB8762AFFC10B007B7226 /* CollectionViewCell.swift in Sources */,
 				EE67B8392AF30046008C95FC /* ProfileViewController.swift in Sources */,
+				EE37F36E2B12B62000D95C9E /* Enum.swift in Sources */,
 				EEA9A1F62AB1C95E00B45518 /* AppDelegate.swift in Sources */,
 				EEA9A1F82AB1C95E00B45518 /* SceneDelegate.swift in Sources */,
 				EE4609E72AF8028C001CB687 /* Environment.swift in Sources */,

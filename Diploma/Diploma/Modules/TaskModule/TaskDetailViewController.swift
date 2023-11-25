@@ -124,4 +124,5 @@ class TaskDetailViewController: UIViewController {
         titleLabel.text = element.notificationName
         descriptionLabel.text = element.notificationText
     }
+    
 }

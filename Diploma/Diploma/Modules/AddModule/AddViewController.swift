@@ -166,11 +166,12 @@ class AddViewController: UIViewController, UITextViewDelegate {
         notification.date = date
         notifications.append(notification)
         RealmManager().write(notification)
-        
     }
+    
 }
 
 extension AddViewController {
+    
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -180,4 +181,5 @@ extension AddViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
 }

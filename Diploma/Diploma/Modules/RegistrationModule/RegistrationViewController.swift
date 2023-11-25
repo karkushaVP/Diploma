@@ -201,12 +201,10 @@ class RegistrationViewController: UIViewController {
     }
     
     private func startErrorLabelTimer() {
-        // Hide error label after 3 seconds
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
             self?.hideErrorLabel()
         }
         
-        // Shake animation on error label
         let shakeAnimation = CAKeyframeAnimation(keyPath: "position.x")
         shakeAnimation.values = [
             self.errorLabel.center.x,
@@ -217,6 +215,7 @@ class RegistrationViewController: UIViewController {
             (self.errorLabel.center.x) - 10,
             self.errorLabel.center.x
         ]
+        
         shakeAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
         shakeAnimation.duration = 0.7
         self.errorLabel.layer.add(shakeAnimation, forKey: nil)
@@ -227,9 +226,11 @@ class RegistrationViewController: UIViewController {
             self?.errorLabel.isHidden = true
         }
     }
+    
 }
 
 extension RegistrationViewController {
+    
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -239,4 +240,5 @@ extension RegistrationViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
 }

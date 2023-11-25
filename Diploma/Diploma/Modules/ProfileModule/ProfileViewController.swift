@@ -9,13 +9,6 @@ import UIKit
 import FirebaseAuth
 import PhotosUI
 
-//значок загрузки
-
-enum ControllerMode {
-    case create
-    case read(id: String)
-}
-
 class ProfileViewController: UIViewController {
     
     private let mode: ControllerMode
@@ -303,8 +296,8 @@ class ProfileViewController: UIViewController {
                     } else {
                         print("Изображение успешно удалено из Firebase Storage")
                     }
-                    
                 }
+                
                 RealmManager<TaskEntityModel>().deleteAll(object: TaskEntityModel.self)
                 PushManager.shared.removeAllNotifications()
                 
@@ -315,7 +308,7 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func saveContactAction() {
-
+        
         startLoadingIndicator()
         
         guard let name = nameInput.text,
@@ -357,7 +350,6 @@ class ProfileViewController: UIViewController {
             else { return }
             PopupViewController.show(style: .logout(
                 title: "Вы уверены, что хотите выйти из профиля и закончить сессию?"
-                //            subtitle: "После удаления профиль не подлежит восстановлению, вы не сможете использовать его снова."
             )) { [self] in
                 if Auth.auth().currentUser != nil {
                     UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
@@ -376,6 +368,7 @@ class ProfileViewController: UIViewController {
             }
         }
     }
+    
 }
 
 extension ProfileViewController: PHPickerViewControllerDelegate {
@@ -399,6 +392,7 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
 }
 
 extension ProfileViewController {
+    
     func hideKeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(RegistrationViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
@@ -408,4 +402,5 @@ extension ProfileViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
 }
