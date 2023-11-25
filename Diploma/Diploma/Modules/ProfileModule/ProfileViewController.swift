@@ -247,9 +247,6 @@ final class ProfileViewController: UIViewController {
         case .create:
             break
         case .read(let id):
-            guard let user = Auth.auth().currentUser
-            else { return }
-            
             PopupViewController.show(style: .confirm(
                 title: "Вы уверены, что хотите удалить профиль и все его данные?",
                 subtitle: "После удаления профиль не подлежит восстановлению, вы не сможете использовать его снова."
@@ -330,8 +327,6 @@ final class ProfileViewController: UIViewController {
         case .create:
             break
         case .read(_):
-            guard let user = Auth.auth().currentUser
-            else { return }
             PopupViewController.show(style: .logout(
                 title: "Вы уверены, что хотите выйти из профиля и закончить сессию?"
             )) {
