@@ -137,6 +137,8 @@ class PopupViewController: UIViewController {
         switch style {
             case .confirm:
                 self.acceptButton.backgroundColor = .red.withAlphaComponent(0.8)
+            case .logout:
+            self .acceptButton.backgroundColor = .systemGreen.withAlphaComponent(0.8)
         }
     }
     
@@ -147,12 +149,19 @@ class PopupViewController: UIViewController {
                 self.cancelButton.setTitle("Отмена", for: .normal)
                 self.titleLabel.text = title
                 self.subTitleLabel.text = subtitle
+            case .logout(let title, let subtitle):
+                self.acceptButton.setTitle("Подтвердить", for: .normal)
+                self.cancelButton.setTitle("Отмена", for: .normal)
+                self.titleLabel.text = title
+                self.subTitleLabel.text = subtitle
         }
     }
     
     private func makeLayoutFor(_ style: Style) {
         switch style {
             case .confirm:
+                break
+            case .logout:
                 break
         }
     }
@@ -170,6 +179,7 @@ class PopupViewController: UIViewController {
 extension PopupViewController {
     enum Style {
         case confirm(title: String, subtitle: String? = nil)
+        case logout(title: String, subtitle: String? = nil)
     }
 }
 

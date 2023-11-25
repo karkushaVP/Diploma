@@ -9,6 +9,9 @@ import UIKit
 import FirebaseAuth
 import PhotosUI
 
+//создать кнопку выйти
+//значок загрузки
+
 enum ControllerMode {
     case create
     case read(id: String)
@@ -66,6 +69,20 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
+    private lazy var logOutButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Выйти из профиля", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 12
+        button.backgroundColor = .systemTeal.withAlphaComponent(0.5)
+        button.addTarget(
+            self,
+            action: #selector(logOutAction),
+            for: .touchUpInside
+        )
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -93,10 +110,16 @@ class ProfileViewController: UIViewController {
         self.view.addSubview(avatarImageView)
         self.view.addSubview(nameInput)
         self.view.addSubview(surnameInput)
-        self.view.addSubview(saveButton)
+        
+        switch mode {
+        case .create:
+            self.view.addSubview(saveButton)
+        case .read(_):
+            self.view.addSubview(logOutButton)
+        }
     }
     
-    private func makeConstraints() {
+    func makeConstraints() {
         
         avatarImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -119,10 +142,19 @@ class ProfileViewController: UIViewController {
             make.height.equalTo(40)
         }
         
-        saveButton.snp.makeConstraints { make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-25)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(40)
+        switch mode {
+        case .create:
+            saveButton.snp.makeConstraints { make in
+                make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-25)
+                make.leading.trailing.equalToSuperview().inset(16)
+                make.height.equalTo(40)
+            }
+        case .read(_):
+            logOutButton.snp.makeConstraints { make in
+                make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-25)
+                make.leading.trailing.equalToSuperview().inset(16)
+                make.height.equalTo(40)
+            }
         }
     }
     
@@ -184,8 +216,6 @@ class ProfileViewController: UIViewController {
                 }
             }
             
-//            настроить SceneDelegate
-            
             let addButton = UIButton(type: .system)
             addButton.addTarget(self, action: #selector(deleteContact), for: .touchUpInside)
             addButton.setImage(UIImage(systemName: "trash"), for: .normal)
@@ -225,22 +255,20 @@ class ProfileViewController: UIViewController {
                 }
                 
                 let storageRef = Environment.storage.child("avatars/\(id)/user_avatar.jpg")
-
                 storageRef.delete { error in
                     if let error = error {
                         print("Ошибка при удалении изображения из Firebase Storage: \(error.localizedDescription)")
                     } else {
                         print("Изображение успешно удалено из Firebase Storage")
                     }
+                    
                 }
-                
                 RealmManager<TaskEntityModel>().deleteAll(object: TaskEntityModel.self)
                 PushManager.shared.removeAllNotifications()
                 
                 UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
                 print("Вызвано подтверждение")
             }
-            //удаляется удаляются все данные с реалма?? с этого профиля в колеккции
         }
     }
     
@@ -268,6 +296,24 @@ class ProfileViewController: UIViewController {
                 }
                 self.nameInput.text = contactData["name"] as? String
                 self.surnameInput.text = contactData["surname"] as? String
+            }
+        }
+    }
+    
+    @objc private func logOutAction() {
+        switch mode {
+        case .create:
+            break
+        case .read(_):
+            guard let user = Auth.auth().currentUser
+            else { return }
+            PopupViewController.show(style: .logout(
+                title: "Вы уверены, что хотите выйти из профиля и закончить сессию?"
+                //            subtitle: "После удаления профиль не подлежит восстановлению, вы не сможете использовать его снова."
+            )) { [self] in
+                if Auth.auth().currentUser != nil {
+                    UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
+                }
             }
         }
     }

@@ -7,7 +7,8 @@
 
 import UIKit
 import FSCalendar
-
+ 
+// отобризить точки на календаре по показу таски
 class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
     private let calendar = FSCalendar()

@@ -29,7 +29,7 @@ class RegistrationViewController: UIViewController {
     private lazy var loginView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
-        view.backgroundColor = .white.withAlphaComponent(0.7)
+        view.backgroundColor = .white.withAlphaComponent(0.9)
         return view
     }()
     

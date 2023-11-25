@@ -16,20 +16,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         pushManager.checkPermission()
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: windowScene)
+        window?.windowScene = windowScene
+        
         if let loggedUser = Auth.auth().currentUser?.uid {
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            window = UIWindow(windowScene: windowScene)
-            window?.windowScene = windowScene
-            window?.rootViewController = UINavigationController(rootViewController: TabBarViewController(currentUserId: loggedUser))
-            window?.makeKeyAndVisible()
+            window?.rootViewController = TabBarViewController(currentUserId: loggedUser)
         } else {
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            window = UIWindow(windowScene: windowScene)
-            window?.windowScene = windowScene
             window?.rootViewController = UINavigationController(rootViewController: RegistrationViewController())
-            window?.makeKeyAndVisible()
         }
-        guard let _ = (scene as? UIWindowScene) else { return }
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
