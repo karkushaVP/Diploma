@@ -9,7 +9,6 @@ import UIKit
 import FirebaseAuth
 import PhotosUI
 
-//создать кнопку выйти
 //значок загрузки
 
 enum ControllerMode {

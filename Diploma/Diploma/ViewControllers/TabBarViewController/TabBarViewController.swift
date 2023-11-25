@@ -40,9 +40,9 @@ class TabBarViewController: UITabBarController {
         controllers.append(UINavigationController(rootViewController: calendarVC))
         calendarVC.tabBarItem = .init(title: "Календарь", image: .init(systemName: "calendar"), tag: 0)
         
-        let listsVC = TasksViewController()
-        controllers.append(UINavigationController(rootViewController: listsVC))
-        listsVC.tabBarItem = .init(title: "Задачи", image: .init(systemName: "pencil"), tag: 0)
+        let tasksVC = TasksViewController()
+        controllers.append(UINavigationController(rootViewController: tasksVC))
+        tasksVC.tabBarItem = .init(title: "Задачи", image: .init(systemName: "pencil"), tag: 0)
 
         self.viewControllers = controllers
     }
