@@ -131,7 +131,6 @@
 				EE67B83A2AF30059008C95FC /* CalendarViewController.swift */,
 				EE67B83C2AF30073008C95FC /* TasksViewController.swift */,
 				EE34BE5E2B0696920031D5E8 /* TaskDetailViewController.swift */,
-				EE09A0042B00FEAB0096EEB7 /* Popup */,
 				EE6AB8772AFFC113007B7226 /* Cells */,
 			);
 			path = ViewControllers;
@@ -164,6 +163,7 @@
 		EEA9A1F42AB1C95E00B45518 /* Diploma */ = {
 			isa = PBXGroup;
 			children = (
+				EE09A0042B00FEAB0096EEB7 /* Popup */,
 				EE4609E82AF80472001CB687 /* Models */,
 				EE1F07812AC1D8580038BE8C /* Managers */,
 				EE1F077B2ABC94B40038BE8C /* ViewControllers */,
