@@ -9,7 +9,12 @@ import Foundation
 import RealmSwift
 
 final class RealmManager<T: Object> {
-    private let realm = try? Realm()
+    
+    private let realm: Realm? = {
+        var configuration = Realm.Configuration.defaultConfiguration
+        configuration.schemaVersion = 1
+        return try? Realm(configuration: configuration)
+    }()
     
     func read() -> [T] {
         guard let realm else { return []}

@@ -20,6 +20,13 @@ class ProfileViewController: UIViewController {
     
     private let mode: ControllerMode
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        indicator.color = .systemTeal
+        return indicator
+    }()
+    
     private lazy var avatarImageView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "profile"))
         image.layer.cornerRadius = 20
@@ -85,6 +92,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupActivityIndicator()
         makeLayout()
         makeConstraints()
         setupControllerMode()
@@ -103,6 +111,11 @@ class ProfileViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupActivityIndicator() {
+        activityIndicator.center = view.center
+        self.view.addSubview(activityIndicator)
     }
     
     private func makeLayout() {
@@ -178,19 +191,43 @@ class ProfileViewController: UIViewController {
         avatarImageView.addGestureRecognizer(tap)
     }
     
+    private func startLoadingIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+        }
+    }
+    
+    private func stopLoadingIndicator() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.activityIndicator.removeFromSuperview()
+        }
+    }
+    
     @objc private func avatarTapAction() {
+        
+        startLoadingIndicator()
+        
         var config = PHPickerConfiguration(photoLibrary: .shared())
         config.selectionLimit = 1
         config.filter = PHPickerFilter.any(of: [.images])
         let pickerVC = PHPickerViewController(configuration: config)
         pickerVC.delegate = self
-        present(pickerVC, animated: true)
+        present(pickerVC, animated: true) {
+            self.stopLoadingIndicator()
+        }
     }
     
     private func setupControllerMode() {
+        
+        startLoadingIndicator()
+        
         switch mode {
         case .create:
             title = "Создать профиль"
+            
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
             
         case .read(let id):
             title = "Мой профиль"
@@ -198,9 +235,14 @@ class ProfileViewController: UIViewController {
                 guard let value = snapshot.value as? [String: Any],
                       let contactValue = value.first?.value as? [String: Any],
                       let contactForRead = try? ProfileModel(key: id, dict: contactValue)
-                else { return }
+                else {
+                    self?.stopLoadingIndicator()
+                    return
+                }
                 self?.nameInput.text = contactForRead.name
                 self?.surnameInput.text = contactForRead.surname
+                
+                self?.stopLoadingIndicator()
             }
             let child = Environment.storage.child("avatars/\(id)/user_avatar.jpg")
             child.downloadURL { (url, error) in
@@ -211,6 +253,7 @@ class ProfileViewController: UIViewController {
                     else { return }
                     DispatchQueue.main.async { [weak self] in
                         self?.avatarImageView.image = image
+                        self?.stopLoadingIndicator()
                     }
                 }
             }
@@ -272,6 +315,9 @@ class ProfileViewController: UIViewController {
     }
     
     @objc private func saveContactAction() {
+
+        startLoadingIndicator()
+        
         guard let name = nameInput.text,
               let surname = surnameInput.text,
               let user = Auth.auth().currentUser,
@@ -286,6 +332,7 @@ class ProfileViewController: UIViewController {
         switch mode {
         case .create:
             Environment.ref.child("users/\(user.uid)/contacts").childByAutoId().setValue(contact.asDict)
+            stopLoadingIndicator()
             saveAvatar(imageData: image)
             dismiss(animated: true)
         case .read(let id):
@@ -295,6 +342,8 @@ class ProfileViewController: UIViewController {
                 }
                 self.nameInput.text = contactData["name"] as? String
                 self.surnameInput.text = contactData["surname"] as? String
+                
+                self.stopLoadingIndicator()
             }
         }
     }

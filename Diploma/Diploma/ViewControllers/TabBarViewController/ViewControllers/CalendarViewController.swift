@@ -12,7 +12,7 @@ import FSCalendar
 class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendarDelegate {
     
     private let calendar = FSCalendar()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         calendar.dataSource = self
@@ -25,12 +25,19 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
         tabBarItem.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.systemTeal], for: .normal)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        calendar.reloadData()
+    }
+    
     private func calendarSettings() {
         calendar.appearance.headerTitleColor = .systemTeal
         calendar.appearance.weekdayTextColor = .systemTeal
         calendar.appearance.titleTodayColor = .black
         calendar.appearance.todayColor = .systemTeal
         calendar.appearance.selectionColor = UIColor.systemTeal.withAlphaComponent(0.5)
+        calendar.firstWeekday = 2
+//        calendar.appearance.eventColor = UIColor.greenColor
     }
 
     private func makeLayout() {
@@ -45,4 +52,62 @@ class CalendarViewController: UIViewController, FSCalendarDataSource, FSCalendar
             make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
         }
     }
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        let tasks = RealmManager<TaskEntityModel>().read()
+        
+        let filteredTasks = tasks.filter { task in
+            switch Calendar.current.compare(date, to: task.date, toGranularity: .day) {
+            case .orderedAscending:
+                return false
+            case .orderedSame:
+                return true
+            case .orderedDescending:
+                return false
+            }
+        }
+        
+        if filteredTasks.isEmpty {
+            return 0
+        } else {
+            return 1
+        }
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        
+        let tasks = RealmManager<TaskEntityModel>().read()
+        
+        let filteredTasks = tasks.filter { task in
+            switch Calendar.current.compare(date, to: task.date, toGranularity: .day) {
+            case .orderedAscending:
+                return false
+            case .orderedSame:
+                return true
+            case .orderedDescending:
+                return false
+            }
+        }
+        if !filteredTasks.isEmpty {
+            let taskDetailVC = TaskDetailViewController()
+            taskDetailVC.selectedNotification = filteredTasks.first
+            self.present(taskDetailVC, animated:true, completion: nil)
+        }
+    }
 }
+
+/*
+ Task1 23.11
+ Task2 23.11
+ Task3 18.11
+ Task4 30.11
+ 
+ [Task1, Task2, Task3, Task4].filter { task in
+    task.date == date
+ ]
+ 
+ [0, 1, 2, 3]
+ 
+ count = 4 итерации
+ isEmpty = 1 итерация
+ */

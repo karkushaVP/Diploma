@@ -37,9 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void)
     {
-        // Update the app interface directly.
-        
-        // Show a banner
         completionHandler(.banner)
 
     }

@@ -163,8 +163,10 @@ class AddViewController: UIViewController, UITextViewDelegate {
         let notification = TaskEntityModel()
         notification.notificationName = title
         notification.notificationText = subTitle
+        notification.date = date
         notifications.append(notification)
         RealmManager().write(notification)
+        
     }
 }
 

@@ -15,7 +15,6 @@ final class PushManager: NSObject {
     static let shared: PushManager = PushManager()
 
     private func requestAutorization() {
-        center.delegate = self
         center.requestAuthorization(options: [.badge, .alert, .sound]) { [weak self] granted, error in
             if granted {
                 self?.isPushesEnabled = true
@@ -82,16 +81,4 @@ struct LocalPush {
         self.date = date
         self.repeats = repeats
     }
-}
-
-extension PushManager: UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification,
-        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
-    ) {
-        completionHandler([.badge, .banner, .sound])
-    }
-    
 }
