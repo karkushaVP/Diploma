@@ -163,22 +163,6 @@ final class ProfileViewController: UIViewController {
         }
     }
     
-    @objc private func saveData() {
-        guard let name = nameInput.text,
-              let surname = surnameInput.text,
-              let user = Auth.auth().currentUser
-        else { return }
-        
-        let userData: [String: Any] = [
-            "username": name,
-            "surname": surname
-        ]
-    }
-    
-    private func readUserData() {
-        guard let user = Auth.auth().currentUser else { return }
-    }
-    
     private func setupGestures() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(avatarTapAction))
         avatarImageView.addGestureRecognizer(tap)
@@ -269,7 +253,7 @@ final class ProfileViewController: UIViewController {
             PopupViewController.show(style: .confirm(
                 title: "Вы уверены, что хотите удалить профиль и все его данные?",
                 subtitle: "После удаления профиль не подлежит восстановлению, вы не сможете использовать его снова."
-            )) { [self] in
+            )) {
                 if let user = Auth.auth().currentUser {
                     user.delete { error in
                         if let error = error {
@@ -350,7 +334,7 @@ final class ProfileViewController: UIViewController {
             else { return }
             PopupViewController.show(style: .logout(
                 title: "Вы уверены, что хотите выйти из профиля и закончить сессию?"
-            )) { [self] in
+            )) {
                 if Auth.auth().currentUser != nil {
                     UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
                 }
@@ -377,15 +361,13 @@ extension ProfileViewController: PHPickerViewControllerDelegate {
         results.forEach { result in
             result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] reading, error in
                 guard let image = reading as? UIImage,
-                      error == nil,
-                      let imageData = image.jpegData(compressionQuality: 1)
+                      error == nil
                 else { return }
                 DispatchQueue.main.async { [weak self] in
                     self?.avatarImageView.image = image
                 }
-                result.itemProvider.loadFileRepresentation(forTypeIdentifier: "public.image") { [weak self] url, _ in
-                    print(url)
-                }
+                result.itemProvider.loadFileRepresentation(forTypeIdentifier: "public.image", completionHandler: {_,_ in 
+                })
             }
         }
     }

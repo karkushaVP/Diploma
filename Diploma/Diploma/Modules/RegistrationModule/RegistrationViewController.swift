@@ -187,8 +187,7 @@ final class RegistrationViewController: UIViewController {
         else { return }
         
         Auth.auth().createUser(withEmail: login, password: password) { [weak self] result, error in
-            guard error == nil,
-                  let result
+            guard error == nil
             else {
                 print(error!.localizedDescription)
                 self?.errorLabel.isHidden = false
