@@ -252,6 +252,7 @@ final class ProfileViewController: UIViewController {
                 subtitle: "После удаления профиль не подлежит восстановлению, вы не сможете использовать его снова."
             )) {
                 if let user = Auth.auth().currentUser {
+                    try? Auth.auth().signOut()
                     user.delete { error in
                         if let error = error {
                             print("Error deleting user: \(error.localizedDescription)")
