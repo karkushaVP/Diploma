@@ -329,7 +329,7 @@ final class ProfileViewController: UIViewController {
                 do{
                     try? Auth.auth().signOut()
                     UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
-                }catch{
+                } catch {
                     print("Error while signing out!")
                 }
             }
