@@ -85,7 +85,6 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupActivityIndicator()
         makeLayout()
         makeConstraints()
         setupControllerMode()
@@ -106,11 +105,6 @@ final class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupActivityIndicator() {
-        activityIndicator.center = view.center
-        self.view.addSubview(activityIndicator)
-    }
-    
     private func makeLayout() {
         self.view.addSubview(avatarImageView)
         self.view.addSubview(nameInput)
@@ -122,6 +116,8 @@ final class ProfileViewController: UIViewController {
         case .read(_):
             self.view.addSubview(logOutButton)
         }
+        
+        self.view.addSubview(activityIndicator)
     }
     
     func makeConstraints() {
@@ -161,6 +157,10 @@ final class ProfileViewController: UIViewController {
                 make.height.equalTo(40)
             }
         }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     private func setupGestures() {
@@ -169,30 +169,25 @@ final class ProfileViewController: UIViewController {
     }
     
     private func startLoadingIndicator() {
-        DispatchQueue.main.async {
-            self.activityIndicator.startAnimating()
+        DispatchQueue.main.async { [ weak self ] in
+            self?.activityIndicator.startAnimating()
         }
     }
     
     private func stopLoadingIndicator() {
-        DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.removeFromSuperview()
+        DispatchQueue.main.async { [ weak self ] in
+            self?.activityIndicator.stopAnimating()
         }
     }
     
     @objc private func avatarTapAction() {
-        
-        startLoadingIndicator()
         
         var config = PHPickerConfiguration(photoLibrary: .shared())
         config.selectionLimit = 1
         config.filter = PHPickerFilter.any(of: [.images])
         let pickerVC = PHPickerViewController(configuration: config)
         pickerVC.delegate = self
-        present(pickerVC, animated: true) {
-            self.stopLoadingIndicator()
-        }
+        present(pickerVC, animated: true)
     }
     
     private func setupControllerMode() {
@@ -331,12 +326,16 @@ final class ProfileViewController: UIViewController {
             PopupViewController.show(style: .logout(
                 title: "Вы уверены, что хотите выйти из профиля и закончить сессию?"
             )) {
-                if Auth.auth().currentUser != nil {
+                do{
+                    try? Auth.auth().signOut()
                     UIApplication.shared.keyWindow?.rootViewController = RegistrationViewController()
+                }catch{
+                    print("Error while signing out!")
                 }
             }
         }
     }
+
     
     @objc private func saveAvatar(imageData: Data) {
         guard let user = Auth.auth().currentUser else { return }
